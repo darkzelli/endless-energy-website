@@ -1,0 +1,2 @@
+# Authorized ad sellers for bywhatevermedium apps.
+# Replace this with the lines from the LevelPlay dashboard (Unity Cloud -> LevelPlay -> app-ads.txt).

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- A pencil, drawn lying flat and turned to point down-left. Dark outline so it reads on light and dark tabs. -->
+  <g transform="rotate(-45 32 32)" stroke="#1f2633" stroke-width="3" stroke-linejoin="round">
+    <path d="M4 32 L16 24 H16 V40 Z" fill="#f1d3a6"/>
+    <path d="M4 32 L9 28.7 V35.3 Z" fill="#1f2633"/>
+    <rect x="16" y="24" width="30" height="16" fill="#f5c542"/>
+    <rect x="46" y="24" width="6" height="16" fill="#b8bec8"/>
+    <path d="M52 24 H56 a4 4 0 0 1 4 4 V36 a4 4 0 0 1 -4 4 H52 Z" fill="#f08a8a"/>
+    <path d="M16 32 H46" fill="none" stroke-width="2" stroke-opacity="0.35"/>
+  </g>
+</svg>

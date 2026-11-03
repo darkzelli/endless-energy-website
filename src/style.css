@@ -1,0 +1,168 @@
+:root {
+  --bg: #ffffff;
+  --surface: #f5f6f9;
+  --text: #1f2633;
+  --muted: #5f6878;
+  --accent: #f9b81f;
+  --accent-soft: #fff4d6;
+  --line: #e6e8ee;
+  --shadow: 0 8px 30px rgba(31, 38, 51, 0.08);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+
+/* --- floating nav -------------------------------------------------------- */
+.nav-wrap { position: sticky; top: 0; z-index: 10; padding: 16px 16px 0; }
+.nav {
+  max-width: 1040px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 14px 12px 24px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+.brand { font-weight: 800; font-size: 19px; text-decoration: none; letter-spacing: -0.01em; }
+.nav-links { display: flex; gap: 4px; }
+.nav-links a {
+  font-weight: 600; font-size: 16px; color: var(--muted); text-decoration: none;
+  padding: 8px 14px; border-radius: 12px;
+}
+.nav-links a:hover { background: var(--surface); color: var(--text); }
+
+/* --- hero ---------------------------------------------------------------- */
+.hero { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; padding: 64px 0 72px; }
+.hero > * { min-width: 0; }
+.hero h1 { font-size: clamp(42px, 7vw, 66px); line-height: 1.04; margin: 0 0 20px; font-weight: 800; letter-spacing: -0.03em; }
+.hero h1 span { color: var(--accent); }
+.hero p { font-size: 20px; color: var(--muted); margin: 0 0 30px; max-width: 30em; }
+
+.store-badge { display: inline-block; line-height: 0; border-radius: 12px; transition: transform 0.15s ease; }
+.store-badge:hover { transform: translateY(-2px); }
+.store-badge img { height: 60px; width: auto; }
+
+/* devices.css draws a 428 x 868 px iPhone; .phone scales it with --s and keeps the layout box in step. */
+.phone { --s: 0.62; width: calc(428px * var(--s)); height: calc(868px * var(--s)); flex: none; }
+.phone > .device { transform: scale(var(--s)); transform-origin: top left; }
+.phone .device-screen { object-fit: cover; object-position: top; background: #ccd1db; }
+
+.phones { position: relative; display: flex; justify-content: center; align-items: center; min-height: calc(868px * 0.62 + 40px); }
+.phones .back { --s: 0.54; transform: translateX(-46%) rotate(-7deg); position: absolute; opacity: 0.98; }
+.phones .front { --s: 0.62; transform: translateX(22%); position: relative; filter: drop-shadow(0 30px 40px rgba(31, 38, 51, 0.2)); }
+.phones::before {
+  content: ""; position: absolute; inset: 8% 4%; border-radius: 50%;
+  background: radial-gradient(closest-side, var(--accent-soft), transparent);
+  z-index: -1;
+}
+
+/* --- screenshots --------------------------------------------------------- */
+.screens { text-align: center; padding-bottom: 96px; }
+.screens h2 { font-size: clamp(30px, 5vw, 40px); margin: 0 0 8px; letter-spacing: -0.02em; }
+.screens > p { color: var(--muted); margin: 0 0 40px; }
+.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 900px; margin: 0 auto; }
+.gallery figure { margin: 0; display: flex; flex-direction: column; align-items: center; }
+.gallery .step-art { width: 100%; max-width: 260px; height: auto; aspect-ratio: 1; }
+.gallery figcaption { margin-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 4px; max-width: 220px; }
+.gallery .num {
+  width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--accent); color: var(--text); font-weight: 800; font-size: 16px; margin-bottom: 6px;
+}
+.gallery strong { font-size: 18px; line-height: 1.3; }
+.gallery .desc { color: var(--muted); font-size: 16px; line-height: 1.45; }
+.gallery .desc b { color: var(--text); }
+
+/* --- policy pages -------------------------------------------------------- */
+.doc { max-width: 760px; margin: 48px auto 80px; }
+.doc h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; margin: 0 0 6px; letter-spacing: -0.02em; }
+.doc .updated { color: var(--muted); margin: 0 0 32px; }
+.doc h2 { font-size: 22px; margin: 36px 0 8px; }
+.doc ul { padding-left: 22px; }
+
+footer { border-top: 1px solid var(--line); padding: 24px 16px 40px; color: var(--muted); font-size: 15px; display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
+footer a { color: var(--muted); }
+
+@media (max-width: 1040px) {
+  .gallery { row-gap: 48px; }
+}
+@media (max-width: 860px) {
+  .hero { grid-template-columns: minmax(0, 1fr); padding-top: 40px; text-align: center; }
+  .hero p { margin-left: auto; margin-right: auto; }
+  .phones .back { display: none; }
+  .phones .front { transform: none; }
+}
+@media (max-width: 520px) {
+  .gallery { grid-template-columns: 1fr; }
+  .gallery .step-art { max-width: 300px; }
+}
+@media (max-width: 420px) {
+  .nav { padding-left: 18px; }
+  .nav-links a { padding: 8px 10px; }
+}
+
+/* --- play page ------------------------------------------------------------ */
+.player { display: grid; grid-template-columns: auto 1fr; gap: 56px; align-items: center; padding: 40px 0 80px; }
+.player-side h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.08; margin: 0 0 14px; letter-spacing: -0.03em; }
+.player-side p { color: var(--muted); margin: 0 0 26px; max-width: 28em; }
+.player-side .side-note { font-size: 15px; margin: 18px 0 0; }
+
+/* A plain rectangle for the game (no transforms, so Unity maps clicks to the canvas correctly). */
+.screen {
+  height: min(78vh, 760px);
+  aspect-ratio: 9 / 19.5;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(31, 38, 51, 0.08), 0 24px 50px rgba(31, 38, 51, 0.18);
+}
+.stage { position: relative; width: 100%; height: 100%; overflow: hidden; background: #ccd1db; }
+.stage canvas { display: block; width: 100%; height: 100%; outline: none; touch-action: none; }
+.poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(6px) saturate(0.9); transform: scale(1.06); }
+.gate, .loading {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 6px; text-align: center; padding: 24px; background: rgba(255, 255, 255, 0.35);
+}
+.gate[hidden], .loading[hidden], .stage canvas[hidden], .poster[hidden] { display: none; }
+.play-btn {
+  width: 92px; height: 92px; border-radius: 50%; border: 0; cursor: pointer; margin-bottom: 14px;
+  background: var(--accent); color: var(--text); display: grid; place-items: center;
+  box-shadow: 0 12px 30px rgba(249, 184, 31, 0.5); transition: transform 0.15s ease;
+}
+.play-btn:hover { transform: scale(1.06); }
+.play-btn svg { width: 40px; height: 40px; margin-left: 5px; }
+.gate-title { margin: 0; font-weight: 800; font-size: 20px; }
+.gate-note { margin: 0; font-size: 14px; color: var(--text); opacity: 0.75; }
+.loading p { margin: 10px 0 0; font-weight: 600; font-size: 15px; }
+.bar { width: 70%; height: 8px; border-radius: 99px; background: rgba(31, 38, 51, 0.15); overflow: hidden; }
+.bar span { display: block; height: 100%; width: 0; background: var(--accent); border-radius: inherit; transition: width 0.2s ease; }
+
+/* "Play in your browser" next to the App Store badge on the landing page */
+.cta { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.play-link {
+  display: inline-flex; align-items: center; gap: 10px; height: 60px; padding: 0 24px;
+  border-radius: 14px; background: var(--accent); color: var(--text); font-weight: 700; text-decoration: none;
+  transition: transform 0.15s ease;
+}
+.play-link:hover { transform: translateY(-2px); }
+.play-link svg { width: 18px; height: 18px; }
+
+@media (max-width: 860px) {
+  .player { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; padding-top: 24px; gap: 32px; }
+  .player-side { order: -1; }
+  .player-side p { margin-left: auto; margin-right: auto; }
+  .screen { height: auto; width: min(100%, calc(80vh * 9 / 19.5)); }
+  .cta { justify-content: center; }
+}

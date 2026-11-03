@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/endless-energy/icon.svg" type="image/svg+xml">
+<title>Play Endless Energy</title>
+<meta name="description" content="Play Endless Energy in your browser.">
+<script type="module" src="/src/play.js"></script>
+</head>
+<body class="play-page">
+<!-- header -->
+<main class="wrap">
+  <section class="player">
+    <div class="screen">
+      <div class="stage" id="stage">
+        <img class="poster" src="/endless-energy/screens/step2.jpg" alt="">
+        <div class="gate" id="gate">
+          <button class="play-btn" id="play" type="button" aria-label="Play Endless Energy">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>
+          </button>
+          <p class="gate-title">Play in your browser</p>
+          <p class="gate-note">About 15 MB. Progress saves in this browser.</p>
+        </div>
+        <div class="loading" id="loading" hidden>
+          <div class="bar"><span id="bar"></span></div>
+          <p id="status">Loading…</p>
+        </div>
+        <canvas id="unity-canvas" tabindex="-1" hidden></canvas>
+      </div>
+    </div>
+    <div class="player-side">
+      <h1>Play Endless Energy</h1>
+      <p>The full game, right here. Tap or click sockets to run cords, power every strip, then pull the plug.</p>
+      <a class="store-badge" href="https://apps.apple.com/app/id6825624984"><img src="/endless-energy/app-store-badge.svg" alt="Download on the App Store" width="180" height="60"></a>
+      <p class="side-note">Best on the iPhone app, with your progress always with you.</p>
+    </div>
+  </section>
+</main>
+<!-- footer -->
+</body>
+</html>
