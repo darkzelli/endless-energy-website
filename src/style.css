@@ -5,6 +5,7 @@
   --muted: #5f6878;
   --accent: #f9b81f;
   --accent-soft: #fff4d6;
+  --blue: #549eff;
   --line: #e6e8ee;
   --shadow: 0 8px 30px rgba(31, 38, 51, 0.08);
 }
@@ -49,7 +50,7 @@ a { color: inherit; text-decoration-color: var(--accent); text-decoration-thickn
 .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; padding: 64px 0 72px; }
 .hero > * { min-width: 0; }
 .hero h1 { font-size: clamp(42px, 7vw, 66px); line-height: 1.04; margin: 0 0 20px; font-weight: 800; letter-spacing: -0.03em; }
-.hero h1 span { color: var(--accent); }
+.hero h1 span { color: var(--blue); }
 .hero p { font-size: 20px; color: var(--muted); margin: 0 0 30px; max-width: 30em; }
 
 .store-badge { display: inline-block; line-height: 0; border-radius: 12px; transition: transform 0.15s ease; }
