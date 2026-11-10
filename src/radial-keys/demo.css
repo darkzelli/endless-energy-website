@@ -1,0 +1,19 @@
+/* The iframe is much bigger than what shows of it (page.js scales it to fit), so the message box
+   stays within the part you can see and keeps a readable size. */
+#msg-area {
+  width: var(--visible, 600px) !important;
+  left: calc(50% - var(--visible, 600px) / 2);
+}
+.msg { font-size: calc(12.5px / var(--scale, 1)); }
+
+/* The tour's pointer (tour.js). Like the message box, it keeps its size however the page scales the frame. */
+.tour-cursor { position: absolute; z-index: 5; width: 0; height: 0; pointer-events: none; transform: scale(calc(1.15 / var(--scale, 1))); }
+.tour-cursor svg { position: absolute; left: -3px; top: -2px; overflow: visible; filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.45)); transform-origin: 3px 2px; transition: transform 90ms; }
+.tour-cursor svg path { fill: #fff; stroke: #10131b; stroke-width: 2; stroke-linejoin: round; }
+.tour-cursor.down svg { transform: scale(0.85); }
+.tour-ripple { position: absolute; left: -22px; top: -22px; width: 44px; height: 44px; border-radius: 50%; border: 3px solid #5b8cff; opacity: 0; }
+.tour-ripple.go { animation: tour-ripple 420ms ease-out; }
+.tour-cursor.right .tour-ripple { border-color: #f5a623; }
+@keyframes tour-ripple { from { opacity: 0.9; transform: scale(0.3); } to { opacity: 0; transform: scale(1); } }
+.tour-label { position: absolute; left: 22px; top: 22px; padding: 2px 8px; border-radius: 6px; background: #f5a623; color: #1a1e27; font: 700 13px/1.4 system-ui, sans-serif; white-space: nowrap; opacity: 0; transition: opacity 120ms; }
+.tour-cursor.right .tour-label { opacity: 1; }

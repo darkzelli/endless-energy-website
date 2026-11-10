@@ -1,0 +1,138 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  cursor: default;
+  font-family: "Segoe UI Variable Text", "Segoe UI", -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+}
+
+.wheel {
+  position: absolute;
+  opacity: 0;
+  transform: scale(0.9);
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45));
+}
+.wheel.show {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 70ms ease-out, transform 90ms cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+
+/* --- Message box ----------------------------------------------------------- */
+#msg-area {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2; /* above the wheel's (square) SVG box, which overlaps it slightly */
+  display: flex;
+  /* Sits right above the wheel; a box taller than the room there starts at the top of
+     the window and covers the wheel's edge instead of being cut off. */
+  align-items: safe flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+.msg {
+  --accent: #5b8cff;
+  pointer-events: auto;
+  max-width: calc(100% - 24px);
+  margin-top: 4px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 12px;
+  border-radius: 9px;
+  background: rgba(16, 19, 27, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e9edf5;
+  font-size: 12.5px;
+  line-height: 1.35;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 90ms ease-out, transform 90ms ease-out;
+}
+.msg.visible { opacity: 1; transform: none; }
+.msg[hidden] { display: none; }
+.msg b { font-weight: 650; color: #fff; }
+.msg kbd {
+  display: inline-block;
+  padding: 0 5px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom-width: 2px;
+  font: 600 11.5px/1.5 ui-monospace, "Cascadia Mono", Menlo, monospace;
+  color: #fff;
+}
+.msg .dim { color: #8d97ab; }
+.msg.prompt { border-color: var(--accent); }
+.msg.ok { border-color: #3ccf8e; }
+.msg.ok .msg-text::before { content: "✓ "; color: #3ccf8e; font-weight: 700; }
+.msg.error { border-color: #e5484d; background: rgba(40, 14, 18, 0.96); }
+.msg.warn { border-color: #f5a623; }
+/* New-version notice. */
+.msg.update { border-color: var(--accent); }
+.msg.update .msg-text::before {
+  content: "NEW";
+  display: inline-block;
+  margin-right: 7px;
+  padding: 0 5px;
+  border-radius: 4px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1.6;
+  vertical-align: 1px;
+}
+
+.msg { flex-wrap: wrap; }
+
+/* Typing a preset's name. */
+.msg .name-edit { font-weight: 650; color: #fff; padding: 0 1px; border-radius: 3px; }
+.msg .name-edit.selected { background: var(--accent); color: #fff; }
+.msg .caret {
+  display: inline-block;
+  width: 1.5px;
+  height: 1.05em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  background: currentColor;
+  animation: caret 1s steps(1) infinite;
+}
+@keyframes caret { 50% { opacity: 0; } }
+.msg .err { color: #ff8a8d; }
+/* The colour you're carrying, in the message. */
+.msg .brush-chip { display: inline-block; width: 0.85em; height: 0.85em; margin-right: 0.3em; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.7); vertical-align: -1px; }
+.msg .brush-chip.none { background: repeating-linear-gradient(45deg, #fff 0 1.5px, #333 1.5px 3px); }
+body.light .msg .name-edit { color: #000; }
+/* Buttons wrap onto more lines inside the box: never past its edge (min-width: 0 lets
+   the row shrink to the box's width instead of staying one long line). */
+.msg-actions { display: flex; gap: 6px; flex-wrap: wrap; flex: 0 1 auto; min-width: 0; max-width: 100%; }
+.msg-actions:empty { display: none; }
+.msg button {
+  font: inherit;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  cursor: pointer;
+}
+.msg button:hover, .msg button.hover { background: rgba(255, 255, 255, 0.16); }
+.msg button.primary { background: var(--accent); border-color: var(--accent); }
+.msg button.danger { background: #e5484d; border-color: #e5484d; }
+
+/* Light theme message box */
+body.light .msg { background: rgba(255, 255, 255, 0.98); color: #1a1e27; border-color: rgba(0, 0, 0, 0.1); }
+body.light .msg b { color: #000; }
+body.light .msg .dim { color: #6a7386; }
+body.light .msg kbd { color: #1a1e27; border-color: rgba(0, 0, 0, 0.2); }
+body.light .msg button { color: #1a1e27; background: rgba(0, 0, 0, 0.05); border-color: rgba(0, 0, 0, 0.15); }
+body.light .msg button.primary, body.light .msg button.danger { color: #fff; }
+body.light .msg.error { background: #fff1f1; }

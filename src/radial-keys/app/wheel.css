@@ -1,0 +1,253 @@
+/* Wheel look. Colours come from the user's accent / fill / see-through settings:
+   radial.js sets these variables (the values below are just the defaults). */
+.wheel {
+  --accent: #5b8cff;
+  --on-accent: #fff;
+  --slice: rgb(22, 26, 36);
+  --slice-alt: rgb(30, 35, 48);
+  --edge: rgba(255, 255, 255, 0.07);
+  --text: #5b8cff;
+  --muted: #3a5398;
+  --hub: rgb(12, 14, 20);
+  --guide: rgba(22, 26, 36, 0.4);
+  font-family: "Segoe UI Variable Text", "Segoe UI", -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* The gap colour, around each slot (radial.js sets --gap). */
+.wheel .gap-fill { fill: var(--gap, transparent); stroke: none; pointer-events: none; }
+
+/* Rings without slots (e.g. the new outer ring while placing) show as a faint band. */
+.wheel .ring-guide { fill: none; stroke: var(--text); stroke-opacity: 0.4; stroke-width: 1.5; stroke-dasharray: 4 6; pointer-events: none; }
+
+/* Background picture shows through the slots; keep labels readable on top of it. */
+.wheel .bg-image { pointer-events: none; opacity: var(--bg-opacity, 1); }
+.wheel.has-bg .slice .label,
+.wheel.has-bg .slice .sub,
+.wheel.has-bg .hub-main,
+.wheel.has-bg .hub-top {
+  stroke: var(--label-halo, rgba(0, 0, 0, 0.55));
+  stroke-width: 3px;
+  paint-order: stroke;
+  stroke-linejoin: round;
+}
+.wheel.has-bg .hub-bg { fill: var(--slice); }
+
+.wheel .slice > path {
+  fill: var(--slice);
+  stroke: var(--edge);
+  stroke-width: 1;
+  transition: fill 60ms linear;
+}
+.wheel .ring:nth-of-type(even) .slice > path { fill: var(--slice-alt); }
+.wheel .slice .label,
+.wheel .slice .sub {
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+  font-weight: 600;
+}
+.wheel .slice .label { fill: var(--text); font-variant-numeric: tabular-nums; }
+.wheel .slice .sub { fill: var(--muted); }
+
+.wheel .slice.active > path { fill: var(--accent); stroke: color-mix(in srgb, var(--accent) 55%, white); }
+.wheel .slice.active .label { fill: var(--on-accent); }
+.wheel .slice.active .sub { fill: var(--on-accent); opacity: 0.85; }
+.wheel.has-bg .slice.active > path { fill: color-mix(in srgb, var(--accent) 70%, transparent); }
+
+/* Accent text stays the accent even when it's close to the fill: radial.js then sets
+   an outline colour so it's still readable (transparent otherwise). */
+.wheel .slice .label,
+.wheel .slice .sub,
+.wheel .caption,
+.wheel .hub-main,
+.wheel .hub-top {
+  stroke: var(--text-outline, transparent);
+  stroke-width: 2.5px;
+  paint-order: stroke;
+  stroke-linejoin: round;
+}
+.wheel .slice.active .label,
+.wheel .slice.active .sub,
+.wheel .slice.active .caption { stroke: transparent; }
+.wheel .slice:not(.active) .icon,
+.wheel .hub-half:not(.active) .icon { filter: var(--icon-outline, none); }
+
+/* Icons (options, hub). Option icons all use the accent colour. */
+.wheel .icon { fill: none; stroke: var(--text); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+.wheel .icon path, .wheel .icon circle { fill: none; stroke: inherit; }
+.wheel .slice.opt .icon { stroke: var(--text); }
+.wheel .slice.active .icon, .wheel .slice.opt.active .icon { stroke: var(--on-accent); }
+/* On/off dot under toggle icons. */
+.wheel .badge { stroke: var(--text); stroke-width: 1.5; pointer-events: none; }
+.wheel .badge.on { fill: var(--text); }
+.wheel .badge.off { fill: none; }
+.wheel .slice.active .badge { stroke: var(--on-accent); }
+.wheel .slice.active .badge.on { fill: var(--on-accent); }
+
+/* Option swatches carry their own fill; show selection with an outline. */
+.wheel .slice.swatch > path { stroke: rgba(255, 255, 255, 0.25); }
+.wheel .slice.swatch.active > path { stroke: #fff; stroke-width: 2.5; }
+
+/* Presets carry their own fill and text colour; the one in use gets an accent outline. */
+.wheel .slice.preset > path { stroke: rgba(255, 255, 255, 0.22); }
+.wheel .slice.preset.current > path { stroke: var(--accent); stroke-width: 2.5; }
+.wheel .slice.preset.active > path { stroke: #fff; stroke-width: 3; }
+.wheel .slice.preset .sub { opacity: 0.85; }
+
+/* Remove mode: the slot under the pointer turns red. */
+.wheel.picking-remove .slice.active > path { fill: #e5484d; stroke: #ff8a8d; }
+.wheel.picking-move .slice.active > path { stroke: #fff; stroke-width: 2; }
+
+/* Slot that's listening for a new key. */
+.wheel .slice.capturing > path {
+  fill: color-mix(in srgb, var(--accent) 35%, var(--slice));
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  animation: listen 1s ease-in-out infinite;
+}
+@keyframes listen { 50% { stroke-opacity: 0.25; } }
+
+/* Sub-menus: the slot you came in through is the way back. */
+.wheel .slice.back-slot > path { fill: color-mix(in srgb, var(--accent) 28%, var(--slice)); stroke: color-mix(in srgb, var(--accent) 60%, transparent); }
+/* Shows a reusable menu: a chain link in the corner (on a solid dot, so it reads on pictures). */
+.wheel .link-mark { pointer-events: none; }
+.wheel .link-mark circle { fill: var(--hub); stroke: color-mix(in srgb, var(--text) 45%, transparent); stroke-width: 1; }
+.wheel .link-mark .icon { stroke-width: 2.6; filter: none; }
+.wheel .slice.active .link-mark .icon { stroke: var(--text); }
+/* Options → Menu: a reusable menu that can't go here (this menu is inside it). */
+.wheel .slice.blocked { opacity: 0.4; }
+.wheel .slot-picture { pointer-events: none; }
+
+/* A picture that fills its whole slot: outline and hover tint go on a layer above it. */
+.wheel .cover-image { pointer-events: none; }
+.wheel .slice.covered .cover-edge { fill: transparent; stroke: rgba(255, 255, 255, 0.18); stroke-width: 1; pointer-events: none; transition: fill 60ms linear; }
+.wheel .slice.covered.active .cover-edge { fill: color-mix(in srgb, var(--accent) 30%, transparent); stroke: var(--accent); stroke-width: 3; }
+.wheel .slice.covered.capturing .cover-edge { stroke: var(--accent); stroke-width: 2.5; animation: listen 1s ease-in-out infinite; }
+.wheel.picking-remove .slice.covered.active .cover-edge { fill: rgba(229, 72, 77, 0.55); stroke: #ff8a8d; }
+.wheel .slice.covered .caption,
+.wheel .slice.covered.active .caption {
+  fill: #fff;
+  opacity: 1;
+  stroke: rgba(0, 0, 0, 0.7);
+  stroke-width: 3px;
+  paint-order: stroke;
+  stroke-linejoin: round;
+}
+
+/* Rotate mode: the ring under the pointer. */
+.wheel .ring.ring-hl .slice > path { fill: color-mix(in srgb, var(--accent) 30%, var(--slice)); stroke: var(--accent); }
+
+/* Ghost slot while placing / moving. */
+.wheel .slice.ghost > path { fill: color-mix(in srgb, var(--accent) 70%, transparent); stroke: #fff; stroke-width: 2; stroke-dasharray: 5 4; }
+.wheel .slice.ghost .label { fill: #fff; }
+.wheel .slice.ghost.invalid > path { fill: rgba(229, 72, 77, 0.55); stroke: #ff8a8d; }
+.wheel.placing .slice:not(.ghost) { opacity: 0.75; }
+
+.wheel .hub-bg { fill: var(--hub); stroke: var(--edge); transition: stroke 80ms; }
+.wheel .hub.active .hub-bg { stroke: var(--accent); stroke-width: 2.5; }
+.wheel .hub.capturing .hub-bg { stroke: var(--accent); stroke-width: 2.5; animation: listen 1s ease-in-out infinite; }
+.wheel .hub text { text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.wheel .hub-icon { stroke: var(--text); }
+/* Target app icon behind the hotkey. */
+.wheel .hub-image { pointer-events: none; }
+.wheel .hub-tint { fill: var(--hub-tint, transparent); pointer-events: none; }
+.wheel .hub-scrim { fill: var(--hub-scrim, rgba(0, 0, 0, 0.42)); stroke: rgba(255, 255, 255, 0.12); pointer-events: none; }
+.wheel .hub.active .hub-scrim { stroke: var(--accent); stroke-width: 2.5; }
+.wheel .hub.has-image .hub-top,
+.wheel .hub.has-image .hub-main {
+  fill: var(--hub-ink, #fff);
+  stroke: var(--label-halo, rgba(0, 0, 0, 0.55));
+  stroke-width: 3px;
+  paint-order: stroke;
+  stroke-linejoin: round;
+}
+.wheel .hub.has-image .hub-top { letter-spacing: 0.02em; text-transform: none; }
+.wheel .hub.active .hub-icon { stroke: var(--accent); }
+/* One-word option captions, curved along the inner edge of the slot. */
+/* (It's a path right inside the slot: keep the slot-shape rules off it.) */
+.wheel .caption-path, .wheel .slice > path.caption-path { fill: none !important; stroke: none !important; }
+.wheel .caption { fill: var(--text); opacity: 0.85; font-weight: 650; text-anchor: middle; dominant-baseline: central; letter-spacing: 0.02em; pointer-events: none; }
+.wheel .slice.active .caption { fill: var(--on-accent); opacity: 1; }
+
+/* Swatch markers: A = accent, F = fill. */
+.wheel .slice .marks { text-anchor: middle; dominant-baseline: central; font-weight: 800; pointer-events: none; letter-spacing: 0.05em; }
+
+/* Two-button center (Accent / Fill in options, − / + in slot size). */
+.wheel .hub-half > path { fill: transparent; transition: fill 60ms linear; }
+.wheel .hub-half.selected > path { fill: color-mix(in srgb, var(--hub-line, #fff) 20%, transparent); stroke: var(--hub-line, #fff); stroke-width: 2; }
+.wheel .hub-swatch { stroke: var(--hub-line, #fff); stroke-width: 1.25; pointer-events: none; }
+.wheel .hub-half.selected .hub-swatch { stroke-width: 2.5; }
+.wheel .hub-half-label { fill: var(--hub-line, #fff); stroke: var(--hub-halo, transparent); stroke-width: 2.5px; paint-order: stroke; stroke-linejoin: round; text-anchor: middle; dominant-baseline: central; font-weight: 700; pointer-events: none; }
+.wheel .hub-half.active .hub-half-label { fill: var(--on-accent); }
+.wheel .hub-half .icon { stroke: var(--hub-line, #fff); filter: none; }
+.wheel .hub-half .icon path { fill: none; }
+.wheel .hub-half.active > path { fill: var(--accent); }
+.wheel .hub-half.active .icon { stroke: var(--on-accent); }
+/* The transparent swatch: diagonal stripes (radial.js gives it the pattern). */
+.wheel .slice.swatch.none > path { stroke: rgba(255, 255, 255, 0.55); stroke-width: 1.2; }
+.wheel .slice.swatch.none.active > path { stroke: #fff; stroke-width: 2.5; }
+.wheel .slice.swatch.none .marks { stroke: rgba(0, 0, 0, 0.75); stroke-width: 3px; paint-order: stroke; stroke-linejoin: round; }
+
+/* The options center's Y and words: black or white on a neutral fill, otherwise the accent
+   (hubLine in radial.js picks), so they never disappear into it. */
+.wheel .hub-y { stroke: var(--hub-y, var(--hub-line, #fff)); stroke-width: 1.5; stroke-linecap: round; pointer-events: none; }
+.wheel .hub-y-halo { stroke: var(--hub-y-halo, var(--hub-halo, transparent)); stroke-width: 3.5; stroke-linecap: round; pointer-events: none; }
+
+/* Tint: a see-through colour over every slot (and the background picture in it). Not on
+   the slot you point at (its highlight stays clear) or colour swatches. Presets only have
+   their own (radial.js sets it per slot). */
+.wheel .tint, .wheel .tint-fill { pointer-events: none; }
+.wheel .tint-fill { fill: var(--tint, transparent); stroke: none; transition: fill 60ms linear; }
+.wheel .slice.active .tint-fill,
+.wheel .slice.swatch .tint-fill { display: none; }
+.wheel .hub-top { fill: var(--muted); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.wheel .hub-main { fill: var(--text); font-weight: 700; }
+.wheel .hub-bottom { fill: var(--muted); }
+.wheel .hub-version { fill: var(--muted); font-weight: 600; letter-spacing: 0.04em; opacity: 0.85; font-variant-numeric: tabular-nums; }
+.wheel .hub.has-image .hub-version { fill: var(--hub-ink, rgba(255, 255, 255, 0.8)); opacity: 1; }
+.wheel.has-bg .hub-version { stroke: var(--label-halo, rgba(0, 0, 0, 0.55)); stroke-width: 3px; paint-order: stroke; stroke-linejoin: round; }
+
+/* A right-click menu on the wheel. The slot it's about stays, as the way back... */
+.wheel .slice.act-source > path { stroke: var(--accent); stroke-width: 2.5; }
+.wheel .slice.covered.act-source .cover-edge { stroke: var(--accent); stroke-width: 2.5; }
+/* ...the slots nearest it are the choices: the main one lightly filled with the accent, ones
+   that delete or throw something away red (on a background picture, a dark base so they read)... */
+.wheel.has-bg .slice.act > path { fill: color-mix(in srgb, var(--hub) 72%, transparent); }
+.wheel.has-bg .slice.act .caption,
+.wheel.has-bg .slice.act-source .caption { stroke: rgba(0, 0, 0, 0.55); stroke-width: 3px; }
+.wheel .slice.act.primary > path { fill: color-mix(in srgb, var(--accent) 24%, var(--slice)); stroke: color-mix(in srgb, var(--accent) 55%, transparent); }
+.wheel.has-bg .slice.act.primary > path { fill: color-mix(in srgb, var(--accent) 30%, color-mix(in srgb, var(--hub) 80%, transparent)); }
+.wheel .slice.act.active > path,
+.wheel.has-bg .slice.act.active > path,
+.wheel .slice.act.primary.active > path { fill: var(--accent); stroke: color-mix(in srgb, var(--accent) 55%, white); }
+.wheel .slice.act.danger .icon { stroke: #e5484d; }
+.wheel .slice.act.danger .caption { fill: #e5484d; }
+.wheel .slice.act.danger.active > path,
+.wheel.has-bg .slice.act.danger.active > path { fill: #e5484d; stroke: #ff8a8d; }
+.wheel .slice.act.danger.active .icon { stroke: #fff; }
+.wheel .slice.act.danger.active .caption { fill: #fff; }
+/* ...and every other slot is greyed out, so it's barely there (radial.js sets these greys
+   from the fill; a background picture doesn't show in them at all). */
+.wheel .slice.off { opacity: 0.16; }
+.wheel .ring .slice.off > path { fill: var(--off-slice); stroke: var(--off-edge); }
+.wheel .slice.off .label,
+.wheel .slice.off .sub,
+.wheel .slice.off .caption { fill: var(--off-ink); stroke: transparent; opacity: 1; }
+.wheel .slice.off .icon { stroke: var(--off-ink); filter: none; }
+.wheel .slice.off .slot-picture,
+.wheel .slice.off .cover-image { opacity: 0.3; filter: grayscale(1); }
+.wheel .slice.off .tint-fill { display: none; }
+.wheel .slice.off.covered .cover-edge { stroke: var(--off-edge); }
+.wheel .slice.off.covered .caption { fill: var(--off-ink); stroke: transparent; }
+
+/* One slot's own colours: fill and text come from its own variables (radial.js). */
+.wheel .slice.back-slot.painted-fill:not(.active) > path { fill: var(--slice); }
+/* The colour you're carrying (right-clicked), in Options. */
+.wheel .slice.swatch.carried > path { stroke: #fff; stroke-width: 3; }
+
+/* A preset being dragged over the wheel (drop to add it). */
+.wheel.drop {
+  filter: drop-shadow(0 0 10px var(--accent)) drop-shadow(0 0 2px var(--accent));
+}

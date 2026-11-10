@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/radial-keys/icon.svg" type="image/svg+xml">
+<title>Radial Keys</title>
+<meta name="description" content="A radial menu that pops up at your cursor and sends the keys your keyboard is missing. Windows and macOS. $5, one time.">
+<script type="module" src="/src/radial-keys/page.js"></script>
+</head>
+<body class="rk">
+<header class="nav-wrap">
+  <nav class="nav">
+    <a class="brand" href="./">Radial Keys</a>
+    <div class="nav-links">
+      <a href="#slots" class="rk-nav-slots">Slots</a>
+      <a href="#presets">Presets</a>
+      <a href="mailto:management@bywhatevermedium.com?subject=Radial%20Keys">Support</a>
+    </div>
+  </nav>
+</header>
+<main class="wrap">
+  <section class="rk-hero">
+    <div class="rk-demo">
+      <div class="rk-stage" id="stage">
+        <!-- Until the first click. It's under the iframe, so a click on it lands on the wheel. -->
+        <div class="rk-clickme" id="clickme" aria-hidden="true">
+          <span>Click me</span>
+          <svg viewBox="0 0 60 60"><path d="M6 6c26 2 40 16 44 42M36 38l14 12 6-17"></path></svg>
+        </div>
+        <iframe id="demo" src="demo.html" width="1600" height="1600" title="Working demo of the Radial Keys wheel"></iframe>
+      </div>
+      <!-- What the tour is showing, and the keys it presses (tour.js in the frame). -->
+      <div class="rk-tour idle" id="tour">
+        <p id="tour-caption">It’s the real app: right-click any slot, or click the center for Options.</p>
+        <div class="rk-keys" id="tour-keys"></div>
+      </div>
+    </div>
+    <div class="rk-copy">
+      <h1>The keys your keyboard <span>is missing.</span></h1>
+      <p class="rk-lead">Radial Keys is a wheel that pops up at your cursor, so you can launch apps, run scripts or send any key you point at: numpad keys, F1–F24, mouse buttons or any combo you like.</p>
+      <div class="rk-buy">
+        <a class="rk-buy-btn" data-buy>Buy Radial Keys · $5 once</a>
+        <span class="rk-os">
+          <svg role="img" aria-label="Windows" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+          <svg role="img" aria-label="macOS" viewBox="0 0 24 24"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="rk-slots" id="slots">
+    <h2>What a slot can be</h2>
+    <p class="rk-sub">Point at one to see what it does.</p>
+    <div class="rk-tiles" id="tiles"></div>
+    <div class="rk-explain" id="explain" aria-live="polite"></div>
+  </section>
+
+  <section class="rk-presets" id="presets">
+    <h2>Presets</h2>
+    <p class="rk-sub">Click a theme to try it on a working wheel. Click <b>Get</b> and it opens in Radial Keys, or drag it: tap your hotkey while dragging to open the wheel, then drop it there.</p>
+    <h3 class="rk-preset-group">Colours</h3>
+    <div class="rk-preset-grid" data-group="solid"></div>
+    <h3 class="rk-preset-group">Pictures</h3>
+    <div class="rk-preset-grid" data-group="pictures"></div>
+  </section>
+
+  <section class="rk-end">
+    <h2>$5, once.</h2>
+    <p>Pay one time and it's yours, on Windows or macOS.</p>
+    <div class="rk-buy">
+        <a class="rk-buy-btn" data-buy>Buy Radial Keys · $5 once</a>
+        <span class="rk-os">
+          <svg role="img" aria-label="Windows" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+          <svg role="img" aria-label="macOS" viewBox="0 0 24 24"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+        </span>
+    </div>
+  </section>
+</main>
+<footer class="wrap">
+  <span>© 2026 <a href="/">bywhatevermedium</a></span>
+  <span><a href="mailto:management@bywhatevermedium.com?subject=Radial%20Keys">management@bywhatevermedium.com</a></span>
+</footer>
+</body>
+</html>

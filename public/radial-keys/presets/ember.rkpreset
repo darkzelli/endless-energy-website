@@ -1,0 +1,434 @@
+{
+  "radialKeysPreset": 1,
+  "name": "Ember",
+  "config": {
+    "holdToSelect": true,
+    "tapMs": 250,
+    "innerRadius": 75,
+    "ringWidth": 73,
+    "ringGap": 2,
+    "gaps": false,
+    "optionLabels": true,
+    "showApp": false,
+    "menus": [],
+    "theme": "solid",
+    "background": "",
+    "accent": "#ffb56e",
+    "fill": "#291a11",
+    "gapColor": "rgba(255,170,100,0.10)",
+    "rings": [
+      {
+        "items": [
+          {
+            "label": "",
+            "key": "Numpad0",
+            "mods": [],
+            "angle": 0,
+            "span": 22.5,
+            "colors": {
+              "fill": "#1d130c"
+            }
+          },
+          {
+            "label": "",
+            "key": "Numpad1",
+            "mods": [],
+            "angle": 22.5,
+            "span": 22.5,
+            "colors": {
+              "fill": "#1d130c"
+            }
+          },
+          {
+            "label": "",
+            "key": "Numpad2",
+            "mods": [],
+            "angle": 45,
+            "span": 22.5,
+            "colors": {
+              "fill": "#1d130c"
+            }
+          },
+          {
+            "label": "",
+            "key": "Numpad3",
+            "mods": [],
+            "angle": 67.5,
+            "span": 22.5,
+            "colors": {
+              "fill": "#1d130c"
+            }
+          },
+          {
+            "label": "",
+            "key": "Numpad4",
+            "mods": [],
+            "angle": 90,
+            "span": 22.5,
+            "colors": {
+              "fill": "#1d130c"
+            }
+          },
+          {
+            "label": "",
+            "key": "Numpad5",
+            "mods": [],
+            "angle": 112.5,
+            "span": 22.5,
+            "colors": {
+              "fill": "#1d130c"
+            }
+          },
+          {
+            "label": "",
+            "key": "Numpad6",
+            "mods": [],
+            "angle": 135,
+            "span": 22.5,
+            "colors": {
+              "fill": "#1d130c"
+            }
+          },
+          {
+            "label": "",
+            "key": "Numpad7",
+            "mods": [],
+            "angle": 157.5,
+            "span": 22.5,
+            "colors": {
+              "fill": "#1d130c"
+            }
+          },
+          {
+            "label": "",
+            "key": "Numpad8",
+            "mods": [],
+            "angle": 180,
+            "span": 22.5,
+            "colors": {
+              "fill": "#1d130c"
+            }
+          },
+          {
+            "label": "",
+            "key": "Numpad9",
+            "mods": [],
+            "angle": 202.5,
+            "span": 22.5,
+            "colors": {
+              "fill": "#1d130c"
+            }
+          },
+          {
+            "label": "",
+            "key": "NumpadDecimal",
+            "mods": [],
+            "angle": 225,
+            "span": 22.5,
+            "colors": {
+              "fill": "#1d130c"
+            }
+          },
+          {
+            "label": "",
+            "key": "NumpadDivide",
+            "mods": [],
+            "angle": 247.5,
+            "span": 22.5,
+            "colors": {
+              "fill": "#1d130c"
+            }
+          },
+          {
+            "label": "",
+            "key": "NumpadMultiply",
+            "mods": [],
+            "angle": 270,
+            "span": 22.5,
+            "colors": {
+              "fill": "#1d130c"
+            }
+          },
+          {
+            "label": "",
+            "key": "NumpadSubtract",
+            "mods": [],
+            "angle": 292.5,
+            "span": 22.5,
+            "colors": {
+              "fill": "#1d130c"
+            }
+          },
+          {
+            "label": "",
+            "key": "NumpadAdd",
+            "mods": [],
+            "angle": 315,
+            "span": 22.5,
+            "colors": {
+              "fill": "#1d130c"
+            }
+          },
+          {
+            "label": "",
+            "key": "NumpadEnter",
+            "mods": [],
+            "angle": 337.5,
+            "span": 22.5,
+            "colors": {
+              "fill": "#1d130c"
+            }
+          }
+        ]
+      },
+      {
+        "items": [
+          {
+            "label": "",
+            "key": "F1",
+            "mods": [],
+            "angle": 0,
+            "span": 30,
+            "colors": {
+              "fill": "#291a11"
+            }
+          },
+          {
+            "label": "",
+            "key": "F2",
+            "mods": [],
+            "angle": 30,
+            "span": 30,
+            "colors": {
+              "fill": "#291a11"
+            }
+          },
+          {
+            "label": "",
+            "key": "F3",
+            "mods": [],
+            "angle": 60,
+            "span": 30,
+            "colors": {
+              "fill": "#291a11"
+            }
+          },
+          {
+            "label": "",
+            "key": "F4",
+            "mods": [],
+            "angle": 90,
+            "span": 30,
+            "colors": {
+              "fill": "#291a11"
+            }
+          },
+          {
+            "label": "",
+            "key": "F5",
+            "mods": [],
+            "angle": 120,
+            "span": 30,
+            "colors": {
+              "fill": "#291a11"
+            }
+          },
+          {
+            "label": "",
+            "key": "F6",
+            "mods": [],
+            "angle": 150,
+            "span": 30,
+            "colors": {
+              "fill": "#291a11"
+            }
+          },
+          {
+            "label": "",
+            "key": "F7",
+            "mods": [],
+            "angle": 180,
+            "span": 30,
+            "colors": {
+              "fill": "#291a11"
+            }
+          },
+          {
+            "label": "",
+            "key": "F8",
+            "mods": [],
+            "angle": 210,
+            "span": 30,
+            "colors": {
+              "fill": "#291a11"
+            }
+          },
+          {
+            "label": "",
+            "key": "F9",
+            "mods": [],
+            "angle": 240,
+            "span": 30,
+            "colors": {
+              "fill": "#291a11"
+            }
+          },
+          {
+            "label": "",
+            "key": "F10",
+            "mods": [],
+            "angle": 270,
+            "span": 30,
+            "colors": {
+              "fill": "#291a11"
+            }
+          },
+          {
+            "label": "",
+            "key": "F11",
+            "mods": [],
+            "angle": 300,
+            "span": 30,
+            "colors": {
+              "fill": "#291a11"
+            }
+          },
+          {
+            "label": "",
+            "key": "F12",
+            "mods": [],
+            "angle": 330,
+            "span": 30,
+            "colors": {
+              "fill": "#291a11"
+            }
+          }
+        ]
+      },
+      {
+        "items": [
+          {
+            "label": "",
+            "key": "Home",
+            "mods": [],
+            "angle": 0,
+            "span": 30,
+            "colors": {
+              "fill": "#3a2519"
+            }
+          },
+          {
+            "label": "",
+            "key": "End",
+            "mods": [],
+            "angle": 30,
+            "span": 30,
+            "colors": {
+              "fill": "#3a2519"
+            }
+          },
+          {
+            "label": "PgUp",
+            "key": "PageUp",
+            "mods": [],
+            "angle": 60,
+            "span": 30,
+            "colors": {
+              "fill": "#3a2519"
+            }
+          },
+          {
+            "label": "PgDn",
+            "key": "PageDown",
+            "mods": [],
+            "angle": 90,
+            "span": 30,
+            "colors": {
+              "fill": "#3a2519"
+            }
+          },
+          {
+            "label": "Ins",
+            "key": "Insert",
+            "mods": [],
+            "angle": 120,
+            "span": 30,
+            "colors": {
+              "fill": "#3a2519"
+            }
+          },
+          {
+            "label": "Del",
+            "key": "Delete",
+            "mods": [],
+            "angle": 150,
+            "span": 30,
+            "colors": {
+              "fill": "#3a2519"
+            }
+          },
+          {
+            "label": "PrtSc",
+            "key": "PrintScreen",
+            "mods": [],
+            "angle": 180,
+            "span": 30,
+            "colors": {
+              "fill": "#3a2519"
+            }
+          },
+          {
+            "label": "Play",
+            "key": "MediaPlayPause",
+            "mods": [],
+            "angle": 210,
+            "span": 30,
+            "colors": {
+              "fill": "#3a2519"
+            }
+          },
+          {
+            "label": "Prev",
+            "key": "MediaTrackPrevious",
+            "mods": [],
+            "angle": 240,
+            "span": 30,
+            "colors": {
+              "fill": "#3a2519"
+            }
+          },
+          {
+            "label": "Next",
+            "key": "MediaTrackNext",
+            "mods": [],
+            "angle": 270,
+            "span": 30,
+            "colors": {
+              "fill": "#3a2519"
+            }
+          },
+          {
+            "label": "Vol−",
+            "key": "AudioVolumeDown",
+            "mods": [],
+            "angle": 300,
+            "span": 30,
+            "colors": {
+              "fill": "#3a2519"
+            }
+          },
+          {
+            "label": "Vol+",
+            "key": "AudioVolumeUp",
+            "mods": [],
+            "angle": 330,
+            "span": 30,
+            "colors": {
+              "fill": "#3a2519"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

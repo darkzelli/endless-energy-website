@@ -1,0 +1,47 @@
+[
+  {
+    "file": "graphite.rkpreset",
+    "blurb": "Neutral greys with white labels. Rings darken toward the center.",
+    "group": "solid"
+  },
+  {
+    "file": "paper.rkpreset",
+    "blurb": "White and soft greys with strong blue labels. Clear in bright rooms.",
+    "group": "solid"
+  },
+  {
+    "file": "midnight.rkpreset",
+    "blurb": "Deep navy with sky-blue labels. Calm and easy on the eyes at night.",
+    "group": "solid"
+  },
+  {
+    "file": "ember.rkpreset",
+    "blurb": "Warm brown-black with amber labels. Cosy, low glare.",
+    "group": "solid"
+  },
+  {
+    "file": "moss.rkpreset",
+    "blurb": "Forest greens with mint labels. Soft, natural contrast.",
+    "group": "solid"
+  },
+  {
+    "file": "lilac.rkpreset",
+    "blurb": "Pale lavender with deep violet labels. Light and friendly.",
+    "group": "solid"
+  },
+  {
+    "file": "dusk.rkpreset",
+    "blurb": "A mountain sunset fills the wheel. Glass slots get darker toward the center so small keys stay clear.",
+    "group": "pictures"
+  },
+  {
+    "file": "tide.rkpreset",
+    "blurb": "Moonlit ocean waves under navy glass slots, with white labels.",
+    "group": "pictures"
+  },
+  {
+    "file": "canopy.rkpreset",
+    "blurb": "A misty pine forest under deep green glass, with white labels.",
+    "group": "pictures"
+  }
+]

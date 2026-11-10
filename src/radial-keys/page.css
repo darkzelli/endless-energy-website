@@ -1,0 +1,169 @@
+/* The Radial Keys page: the shared nav and footer from style.css, in the app's blue. */
+body.rk { --accent: #5b8cff; --blue: #3568e0; }
+.rk .wrap { max-width: 1280px; }
+.rk .nav { max-width: 520px; }
+
+/* --- wheel on the left, explanation on the right ------------------------- */
+.rk-hero { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 40px; align-items: center; padding: 32px 0 72px; }
+.rk-stage { position: relative; width: min(100%, 100vh - 200px); min-width: min(100%, 340px); margin: 0 auto; aspect-ratio: 1; overflow: hidden; }
+/* 1600 px across inside, so the wheel can grow; page.js scales it around its center, which never moves. */
+.rk-stage iframe { position: absolute; left: 50%; top: 50%; width: 1600px; height: 1600px; border: 0; transform: translate(-50%, -50%) scale(0.9); background: transparent; transition: transform 0.14s ease-out; }
+
+/* "Click me", in the corner beside the wheel, until the first click. */
+.rk-clickme { position: absolute; left: 2%; top: 2%; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; color: var(--blue); transition: opacity 0.2s ease; animation: rk-nudge 1.2s ease-in-out infinite; }
+.rk-clickme.gone { opacity: 0; animation: none; }
+.rk-clickme span { font-size: clamp(16px, 2.2vw, 24px); font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; }
+.rk-clickme svg { width: clamp(30px, 4.4vw, 56px); height: auto; margin-left: 12%; fill: none; stroke: currentColor; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+@keyframes rk-nudge { 50% { transform: translate(5px, 5px); } }
+@media (prefers-reduced-motion: reduce) {
+  .rk-clickme { animation: none; }
+}
+/* While the tour plays, it says what it's doing under the wheel instead. */
+.rk-clickme.touring { opacity: 0; animation: none; }
+.rk-tour { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 14px; min-height: 64px; margin: 4px auto 0; max-width: 560px; text-align: center; }
+.rk-tour p { margin: 0; font-weight: 600; }
+.rk-tour.idle p { font-weight: 400; color: var(--muted); }
+.rk-keys { display: flex; gap: 6px; min-height: 32px; }
+.rk-keys kbd { padding: 3px 10px; border: 1px solid var(--line); border-bottom-width: 3px; border-radius: 8px; background: var(--surface); font: 600 15px/1.5 "Inter", system-ui, sans-serif; color: var(--text); white-space: nowrap; }
+
+.rk-copy h1 { font-size: clamp(36px, 4.4vw, 58px); line-height: 1.05; margin: 0 0 20px; font-weight: 800; letter-spacing: -0.03em; }
+.rk-copy h1 span { color: var(--blue); }
+.rk-lead { font-size: 19px; color: var(--muted); margin: 0; }
+.rk-buy { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 18px; margin-top: 26px; }
+.rk-end .rk-buy { justify-content: center; margin-top: 0; }
+.rk-os { display: flex; align-items: center; gap: 12px; color: var(--muted); }
+.rk-os svg { display: block; width: 24px; height: 24px; fill: currentColor; }
+.rk-buy-btn {
+  display: inline-block; padding: 14px 26px; border-radius: 14px;
+  background: var(--blue); color: #fff; font-size: 18px; font-weight: 700; text-decoration: none; white-space: nowrap;
+  box-shadow: 0 8px 22px rgba(53, 104, 224, 0.28);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.rk-buy-btn:hover { transform: translateY(-2px); background: #2a59c9; }
+
+/* --- what a slot can be -------------------------------------------------- */
+.rk-slots { padding: 0 0 80px; scroll-margin-top: 100px; }
+.rk-slots h2, .rk-end h2 { font-size: clamp(30px, 5vw, 40px); margin: 0 0 6px; letter-spacing: -0.02em; text-align: center; }
+.rk-sub { color: var(--muted); margin: 0 0 32px; text-align: center; }
+.rk-tiles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
+.rk-tile {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 18px 8px 14px; border: 1px solid var(--line); border-radius: 16px; background: var(--bg);
+  font: inherit; font-size: 15px; font-weight: 600; color: var(--muted); cursor: default;
+  transition: border-color 0.1s ease, background 0.1s ease;
+}
+.rk-tile svg { display: block; width: 100%; max-width: 128px; height: auto; pointer-events: none; }
+.rk-tile[aria-pressed="true"] { border-color: var(--accent); background: var(--surface); color: var(--text); }
+.rk-tile:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+/* The slot shown is outlined by the renderer's own colours, so it needs no shadow from the wheel's window. */
+.rk-tile .hub { display: none; }
+/* The tiles' slots in the hero wheel's light look (bridge.js): pale grey, blue labels and icons. */
+.rk-tile .wheel {
+  --accent: #3d7ef2; --on-accent: #fff; --text: #3d7ef2; --muted: #8fb2f2;
+  --slice: #ebebef; --slice-alt: #ebebef; --edge: rgba(0, 0, 0, 0.08); --hub: #ffffff;
+}
+
+/* Every explanation sits in the same cell, so the page keeps its height as you point around. */
+.rk-explain { display: grid; margin-top: 16px; padding: 24px 28px; border-radius: 16px; background: var(--surface); }
+.rk-explain-one { grid-area: 1 / 1; visibility: hidden; }
+.rk-explain-one.on { visibility: visible; }
+.rk-explain h3 { margin: 0 0 6px; font-size: 20px; letter-spacing: -0.01em; }
+.rk-explain p { margin: 0; max-width: 46em; }
+.rk-explain .rk-how { margin-top: 6px; color: var(--muted); }
+
+.rk-end { text-align: center; padding: 0 0 96px; }
+.rk-end p { color: var(--muted); margin: 0 0 24px; }
+
+@media (max-width: 980px) {
+  .rk-hero { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-top: 28px; }
+  .rk-copy { order: -1; }
+  .rk-demo { max-width: 600px; width: 100%; margin: 0 auto; }
+  .rk-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 460px) {
+  .rk-tile { font-size: 14px; padding: 14px 4px 12px; }
+  .rk-explain { padding: 20px; }
+}
+
+/* --- presets: Get them like Blender themes (click, or drag onto the wheel) --- */
+.rk-presets { padding: 0 0 80px; scroll-margin-top: 100px; }
+.rk-presets h2 { font-size: clamp(30px, 5vw, 40px); margin: 0 0 6px; letter-spacing: -0.02em; text-align: center; }
+.rk-presets .rk-sub { max-width: 40em; margin-left: auto; margin-right: auto; }
+.rk-preset-group { margin: 36px 0 14px; font-size: 22px; letter-spacing: -0.01em; text-align: center; }
+.rk-preset-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 340px)); justify-content: center; gap: 16px; }
+@media (max-width: 600px) { .rk-preset-grid { grid-template-columns: minmax(0, 1fr); } }
+.rk-preset { display: flex; flex-direction: column; align-items: flex-start; padding: 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--bg); cursor: pointer; transition: border-color 0.12s ease, transform 0.12s ease; }
+.rk-preset:hover { border-color: var(--accent); transform: translateY(-2px); }
+.rk-preset-open { display: flex; flex-direction: column; align-items: flex-start; width: 100%; padding: 0; border: 0; background: none; font: inherit; color: inherit; text-align: left; cursor: pointer; }
+.rk-preset-open:focus-visible { outline: 3px solid var(--accent); outline-offset: 6px; border-radius: 12px; }
+.rk-preset-wheel { align-self: center; display: block; width: min(100%, 220px); margin-bottom: 12px; }
+.rk-preset-wheel svg { display: block; width: 100%; height: auto; pointer-events: none; }
+.rk-preset .hub { display: none; }
+.rk-preset h3 { margin: 0 0 4px; font-size: 20px; letter-spacing: -0.01em; }
+.rk-preset-blurb { margin: 0 0 16px; color: var(--muted); flex: 1; }
+.rk-get {
+  display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px 9px 10px; border-radius: 12px;
+  background: var(--blue); color: #fff; font-weight: 700; text-decoration: none; cursor: grab;
+  box-shadow: 0 6px 16px rgba(53, 104, 224, 0.24); transition: transform 0.15s ease, background 0.15s ease;
+}
+.rk-get:hover { transform: translateY(-1px); background: #2a59c9; }
+.rk-get:active, .rk-get.dragging { cursor: grabbing; }
+.rk-get.dragging {
+  background: transparent; color: var(--blue); box-shadow: none; transform: none;
+  outline: 2px dashed var(--blue); outline-offset: -2px; transition: none;
+}
+.rk-get svg { width: 18px; height: 18px; fill: currentColor; opacity: 0.75; }
+.rk-preset-note { margin: 10px 0 0; font-size: 14px; color: var(--muted); }
+/* Three nav links: keep the name on one line on phones. */
+.rk .brand { white-space: nowrap; }
+@media (max-width: 400px) {
+  .rk .rk-nav-slots { display: none; }
+  .rk .nav-links a { padding: 8px 8px; }
+}
+
+/* --- the preset preview (preview.js): a live wheel on the left, the theme on the right --- */
+.rk-modal {
+  width: min(980px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); padding: 0; border: 0; border-radius: 20px;
+  background: var(--bg); color: var(--text); box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35); overflow: auto;
+}
+.rk-modal[open] { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); animation: rk-pop 0.16s ease-out; }
+.rk-modal::backdrop { background: rgba(10, 12, 20, 0.55); backdrop-filter: blur(3px); }
+@keyframes rk-pop { from { opacity: 0; transform: scale(0.97); } }
+@media (prefers-reduced-motion: reduce) { .rk-modal[open] { animation: none; } }
+.rk-modal-stage { position: relative; aspect-ratio: 1; overflow: hidden; background: #18181b; }
+.rk-modal-stage iframe { position: absolute; left: 50%; top: 50%; width: 1600px; height: 1600px; border: 0; transform: translate(-50%, -50%) scale(0.3); background: transparent; }
+.rk-modal-info { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 40px 36px 32px; }
+.rk-modal-kind { margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--blue); }
+.rk-modal-info h2 { margin: 0; font-size: 32px; letter-spacing: -0.02em; }
+.rk-modal-blurb { margin: 0; font-size: 17px; color: var(--muted); }
+.rk-swatches { display: flex; gap: 8px; margin: 4px 0; padding: 0; list-style: none; }
+.rk-swatches li { width: 28px; height: 28px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15); }
+.rk-modal-try { margin: auto 0 0; padding: 12px 14px; border-radius: 12px; background: var(--surface); font-size: 14px; color: var(--muted); }
+.rk-modal-close {
+  position: absolute; top: 12px; right: 12px; z-index: 1; display: grid; place-items: center; width: 44px; height: 44px;
+  border: 0; border-radius: 50%; background: var(--surface); color: var(--text); cursor: pointer;
+}
+.rk-modal-close:hover { background: var(--line); }
+.rk-modal-close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+@media (max-width: 760px) {
+  .rk-modal[open] { grid-template-columns: minmax(0, 1fr); }
+  .rk-modal-info { padding: 24px 20px 24px; }
+  .rk-modal-info h2 { font-size: 26px; }
+}
+
+/* --- thanks.html: the download after paying ------------------------------ */
+.rk-thanks { min-height: 60vh; padding: 72px 16px; text-align: center; }
+.rk-thanks h1 { font-size: clamp(30px, 5vw, 44px); margin: 0 0 8px; letter-spacing: -0.02em; }
+.rk-thanks [data-show] { display: none; }
+.rk-thanks[data-state="loading"] [data-show="loading"],
+.rk-thanks[data-state="ready"] [data-show="ready"],
+.rk-thanks[data-state="unpaid"] [data-show="unpaid"],
+.rk-thanks[data-state="error"] [data-show="error"] { display: block; }
+.rk-thanks [data-show="loading"] h1 { color: var(--muted); font-weight: 600; }
+.rk-downloads { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+.rk-dl { display: inline-flex; align-items: center; gap: 10px; }
+.rk-dl[hidden] { display: none; }
+.rk-dl svg { width: 20px; height: 20px; fill: currentColor; }
+/* The other system's build: there, but quieter. */
+.rk-dl-other { background: var(--surface); color: var(--text); box-shadow: none; border: 1px solid var(--line); }
+.rk-dl-other:hover { background: var(--line); }

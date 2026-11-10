@@ -1,0 +1,12 @@
+# Supabase project for selling Radial Keys. Deploy with: npx supabase functions deploy
+project_id = "bywhatevermedium"
+
+# All three are called by browsers and Stripe, not signed-in users: no Supabase JWT.
+[functions.checkout]
+verify_jwt = false
+
+[functions.stripe-webhook]
+verify_jwt = false
+
+[functions.download]
+verify_jwt = false
