@@ -43,5 +43,10 @@
     "file": "canopy.rkpreset",
     "blurb": "A misty pine forest under deep green glass, with white labels.",
     "group": "pictures"
+  },
+  {
+    "file": "blender.rkpreset",
+    "blurb": "Blender's views, orbit, zoom, render and edit mode on one wheel: the numpad and shortcuts a laptop keyboard doesn't have.",
+    "group": "programs"
   }
 ]

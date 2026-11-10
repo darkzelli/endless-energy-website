@@ -1,0 +1,179 @@
+{
+  "radialKeysPreset": 1,
+  "name": "Blender",
+  "config": {
+    "holdToSelect": true,
+    "tapMs": 250,
+    "innerRadius": 64.0,
+    "ringWidth": 64.0,
+    "ringGap": 4.0,
+    "gaps": true,
+    "accent": "#ff9a3c",
+    "fill": "#232323",
+    "theme": "solid",
+    "background": "",
+    "optionLabels": true,
+    "showApp": true,
+    "rings": [
+      {
+        "items": [
+          {
+            "label": "Top",
+            "key": "Numpad7",
+            "mods": [],
+            "angle": 0.0,
+            "span": 40.0
+          },
+          {
+            "label": "Flip",
+            "key": "Numpad9",
+            "mods": [],
+            "angle": 40.0,
+            "span": 40.0
+          },
+          {
+            "label": "Right",
+            "key": "Numpad3",
+            "mods": [],
+            "angle": 80.0,
+            "span": 40.0
+          },
+          {
+            "label": "Front",
+            "key": "Numpad1",
+            "mods": [],
+            "angle": 120.0,
+            "span": 40.0
+          },
+          {
+            "label": "Camera",
+            "key": "Numpad0",
+            "mods": [],
+            "angle": 160.0,
+            "span": 40.0
+          },
+          {
+            "label": "Focus",
+            "key": "NumpadDecimal",
+            "mods": [],
+            "angle": 200.0,
+            "span": 40.0
+          },
+          {
+            "label": "Persp",
+            "key": "Numpad5",
+            "mods": [],
+            "angle": 240.0,
+            "span": 40.0
+          },
+          {
+            "label": "Zoom +",
+            "key": "NumpadAdd",
+            "mods": [],
+            "angle": 280.0,
+            "span": 40.0
+          },
+          {
+            "label": "Zoom −",
+            "key": "NumpadSubtract",
+            "mods": [],
+            "angle": 320.0,
+            "span": 40.0
+          }
+        ]
+      },
+      {
+        "items": [
+          {
+            "label": "Render",
+            "key": "F12",
+            "mods": [],
+            "angle": 0.0,
+            "span": 30.0
+          },
+          {
+            "label": "View render",
+            "key": "F11",
+            "mods": [],
+            "angle": 30.0,
+            "span": 30.0
+          },
+          {
+            "label": "Max area",
+            "key": "Space",
+            "mods": [
+              "ctrl"
+            ],
+            "angle": 60.0,
+            "span": 30.0
+          },
+          {
+            "label": "Add",
+            "key": "KeyA",
+            "mods": [
+              "shift"
+            ],
+            "angle": 90.0,
+            "span": 30.0
+          },
+          {
+            "label": "Edit mode",
+            "key": "Tab",
+            "mods": [],
+            "angle": 120.0,
+            "span": 30.0
+          },
+          {
+            "label": "Orbit ↑",
+            "key": "Numpad8",
+            "mods": [],
+            "angle": 150.0,
+            "span": 30.0
+          },
+          {
+            "label": "Orbit →",
+            "key": "Numpad6",
+            "mods": [],
+            "angle": 180.0,
+            "span": 30.0
+          },
+          {
+            "label": "Orbit ↓",
+            "key": "Numpad2",
+            "mods": [],
+            "angle": 210.0,
+            "span": 30.0
+          },
+          {
+            "label": "Orbit ←",
+            "key": "Numpad4",
+            "mods": [],
+            "angle": 240.0,
+            "span": 30.0
+          },
+          {
+            "label": "Local",
+            "key": "NumpadDivide",
+            "mods": [],
+            "angle": 270.0,
+            "span": 30.0
+          },
+          {
+            "label": "Frame all",
+            "key": "Home",
+            "mods": [],
+            "angle": 300.0,
+            "span": 30.0
+          },
+          {
+            "label": "Search",
+            "key": "F3",
+            "mods": [],
+            "angle": 330.0,
+            "span": 30.0
+          }
+        ]
+      }
+    ]
+  }
+}
