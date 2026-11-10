@@ -1,6 +1,6 @@
 // The thanks page asks here with its session_id: if that session was paid, it gets signed links to the builds.
 // Each function is one file, so it can be pasted into the Supabase dashboard as is.
-import Stripe from 'npm:stripe@17.7.0'
+import Stripe from 'npm:stripe@23.0.1'
 import { createClient } from 'npm:@supabase/supabase-js@2.49.4'
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { httpClient: Stripe.createFetchHttpClient() })

@@ -1,5 +1,5 @@
 // The Buy buttons link here: starts a $5 Stripe Checkout and sends the browser to it.
-import Stripe from 'npm:stripe@17.7.0'
+import Stripe from 'npm:stripe@23.0.1'
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { httpClient: Stripe.createFetchHttpClient() })
 const SITE_URL = Deno.env.get('SITE_URL') ?? 'https://bywhatevermedium.com'
@@ -13,7 +13,14 @@ Deno.serve(async () => {
         price_data: {
           currency: 'usd',
           unit_amount: 500,
-          product_data: { name: 'Radial Keys', description: 'For Windows and macOS. Pay once, keep it.' },
+          // Stripe is the seller of record (Managed Payments) and handles sales tax and VAT. $5 is what
+          // buyers pay, tax included, and the tax code says what it is: downloadable software, personal use.
+          tax_behavior: 'inclusive',
+          product_data: {
+            name: 'Radial Keys',
+            description: 'For Windows and macOS. Pay once, keep it.',
+            tax_code: 'txcd_10202000',
+          },
         },
       }],
       success_url: `${SITE_URL}/radial-keys/thanks.html?session_id={CHECKOUT_SESSION_ID}`,

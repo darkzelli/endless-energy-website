@@ -1,7 +1,7 @@
 // Stripe calls this when a checkout finishes: records the purchase.
 // Subscribe the endpoint to checkout.session.completed and checkout.session.async_payment_succeeded.
 // Each function is one file, so it can be pasted into the Supabase dashboard as is.
-import Stripe from 'npm:stripe@17.7.0'
+import Stripe from 'npm:stripe@23.0.1'
 import { createClient } from 'npm:@supabase/supabase-js@2.49.4'
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { httpClient: Stripe.createFetchHttpClient() })
