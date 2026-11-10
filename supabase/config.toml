@@ -10,3 +10,6 @@ verify_jwt = false
 
 [functions.download]
 verify_jwt = false
+
+[functions.resend-link]
+verify_jwt = false

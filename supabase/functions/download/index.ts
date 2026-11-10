@@ -1,4 +1,6 @@
-// The thanks page asks here with its session_id: if that session was paid, it gets signed links to the builds.
+// The thanks page asks here for signed links to the builds, with either
+//   ?session_id=cs_…  from Stripe, right after paying: good for MAX_DOWNLOADS, so a shared page stops working
+//   ?token=…          from an emailed link (resend-link): good once, for a day
 // Each function is one file, so it can be pasted into the Supabase dashboard as is.
 import Stripe from 'npm:stripe@23.0.1'
 import { createClient } from 'npm:@supabase/supabase-js@2.49.4'
@@ -9,6 +11,7 @@ const db = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SE
 })
 const BUCKET = 'radial-keys'
 const LINK_SECONDS = 60 * 10
+const MAX_DOWNLOADS = 1
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), {
@@ -47,12 +50,29 @@ async function latestBuilds() {
   }
 }
 
-Deno.serve(async (req) => {
-  const sessionId = new URL(req.url).searchParams.get('session_id') ?? ''
-  if (!sessionId.startsWith('cs_')) return json({ error: 'missing' }, 400)
+// Whether this ask may have links: 'ok', or why not. Uses up the download or the emailed link.
+async function claim(params: URLSearchParams): Promise<'ok' | 'missing' | 'unpaid' | 'used'> {
+  const token = params.get('token')
+  if (token) {
+    const { data, error } = await db.rpc('claim_token', { p_token: token })
+    if (error) throw error
+    return data ? 'ok' : 'used'
+  }
+  const sessionId = params.get('session_id') ?? ''
+  if (!sessionId.startsWith('cs_')) return 'missing'
+  if (!(await isPaid(sessionId))) return 'unpaid'
+  const { data, error } = await db.rpc('claim_download', { p_session_id: sessionId, p_max: MAX_DOWNLOADS })
+  if (error) throw error
+  return data ? 'ok' : 'used'
+}
 
+const STATUS = { missing: 400, unpaid: 402, used: 410 }
+
+Deno.serve(async (req) => {
   try {
-    if (!(await isPaid(sessionId))) return json({ error: 'unpaid' }, 402)
+    const claimed = await claim(new URL(req.url).searchParams)
+    if (claimed !== 'ok') return json({ error: claimed }, STATUS[claimed])
+
     const builds = await latestBuilds()
     const links: Record<string, { name: string; url: string }> = {}
     for (const [os, name] of Object.entries(builds)) {
@@ -61,7 +81,7 @@ Deno.serve(async (req) => {
       if (error) throw error
       links[os] = { name, url: data.signedUrl }
     }
-    return json(links)
+    return json({ links, seconds: LINK_SECONDS })
   } catch (e) {
     console.error(e)
     return json({ error: 'server' }, 500)

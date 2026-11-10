@@ -40,6 +40,10 @@ body.rk { --accent: #5b8cff; --blue: #3568e0; }
   transition: transform 0.15s ease, background 0.15s ease;
 }
 .rk-buy-btn:hover { transform: translateY(-2px); background: #2a59c9; }
+/* For buyers: to thanks.html, which emails them a new download link. */
+.rk-redownload { display: inline-block; margin-top: 14px; font-size: 15px; color: var(--muted); text-decoration-color: var(--line); }
+.rk-redownload:hover { color: var(--text); text-decoration-color: var(--blue); }
+.rk-end .rk-redownload { display: block; width: fit-content; margin: 16px auto 0; }
 
 /* --- what a slot can be -------------------------------------------------- */
 .rk-slots { padding: 0 0 80px; scroll-margin-top: 100px; }
@@ -156,13 +160,30 @@ body.rk { --accent: #5b8cff; --blue: #3568e0; }
 .rk-thanks-page > footer { width: 100%; padding-top: 20px; padding-bottom: 24px; }
 .rk-thanks { flex: 1; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 16px; text-align: center; }
 .rk-thanks-icon { display: block; width: 120px; height: 120px; margin-bottom: 24px; }
-.rk-thanks h1 { font-size: clamp(30px, 5vw, 44px); margin: 0 0 8px; letter-spacing: -0.02em; }
+.rk-thanks h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.15; margin: 0 0 12px; letter-spacing: -0.02em; }
 .rk-thanks [data-show] { display: none; }
 .rk-thanks[data-state="loading"] [data-show="loading"],
 .rk-thanks[data-state="ready"] [data-show="ready"],
+.rk-thanks[data-state="again"] [data-show="again"],
+.rk-thanks[data-state="sent"] [data-show="sent"],
 .rk-thanks[data-state="unpaid"] [data-show="unpaid"],
 .rk-thanks[data-state="error"] [data-show="error"] { display: block; }
 .rk-thanks [data-show="loading"] h1 { color: var(--muted); font-weight: 600; }
+/* Asking again: the one heading for why. */
+.rk-thanks [data-why] { display: none; }
+.rk-thanks[data-why="expired"] [data-why="expired"],
+.rk-thanks[data-why="used"] [data-why="used"],
+.rk-thanks[data-why="token"] [data-why="token"],
+.rk-thanks[data-why="none"] [data-why="none"] { display: block; }
+.rk-email { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; width: min(100%, 520px); margin: 0 auto; }
+.rk-email input {
+  flex: 1 1 240px; min-width: 0; padding: 13px 16px; border: 1px solid var(--line); border-radius: 14px;
+  font: inherit; font-size: 17px; color: var(--text); background: var(--bg);
+}
+.rk-email input:focus { outline: 3px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+.rk-email button { border: 0; font: inherit; font-size: 18px; font-weight: 700; cursor: pointer; }
+.rk-email button:disabled { opacity: 0.6; cursor: progress; }
+.rk-email-note { margin: 20px 0 0; font-size: 15px; color: var(--muted); }
 .rk-downloads { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
 .rk-dl { display: inline-flex; align-items: center; gap: 10px; }
 .rk-dl[hidden] { display: none; }

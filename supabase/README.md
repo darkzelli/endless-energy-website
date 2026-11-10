@@ -6,8 +6,11 @@ $5 once, through Stripe Checkout, with the builds in a private Supabase Storage 
 2. Stripe calls `stripe-webhook` when it's paid, which adds a row to `purchases`.
 3. Stripe sends the buyer to `radial-keys/thanks.html?session_id=…`. That page asks `download`, which checks
    the session was paid (in `purchases`, or with Stripe if the webhook hasn't arrived) and returns 10-minute
-   signed links to the newest `*-Mac.dmg` and `*-Windows.exe` in the bucket. The thanks URL keeps working,
-   so it's the buyer's download link for later versions too.
+   signed links to the newest `*-Mac.dmg` and `*-Windows.exe` in the bucket. Each purchase's thanks page
+   works once, so passing it on doesn't help anyone.
+4. After that, the page asks for the email they paid with, and `resend-link` emails a single-use link
+   (`thanks.html?token=…`, good for a day) through Resend: at most 3 a day per purchase. To give someone
+   their thanks page back, set their `downloads` to 0 in `purchases`.
 
 ## Setting it up
 
@@ -15,7 +18,7 @@ $5 once, through Stripe Checkout, with the builds in a private Supabase Storage 
 npx supabase login
 npx supabase link --project-ref <ref>        # the project at supabase.com/dashboard
 npx supabase db push                         # purchases table + private radial-keys bucket
-npx supabase secrets set STRIPE_SECRET_KEY=sk_live_… SITE_URL=https://bywhatevermedium.com
+npx supabase secrets set STRIPE_SECRET_KEY=sk_live_… SITE_URL=https://bywhatevermedium.com RESEND_API_KEY=re_…
 npx supabase functions deploy
 ```
 
