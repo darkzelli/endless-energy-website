@@ -113,7 +113,6 @@ body.rk { --accent: #5b8cff; --blue: #3568e0; }
   outline: 2px dashed var(--blue); outline-offset: -2px; transition: none;
 }
 .rk-get svg { width: 18px; height: 18px; fill: currentColor; opacity: 0.75; }
-.rk-preset-note { margin: 10px 0 0; font-size: 14px; color: var(--muted); }
 /* Three nav links: keep the name on one line on phones. */
 .rk .brand { white-space: nowrap; }
 @media (max-width: 400px) {

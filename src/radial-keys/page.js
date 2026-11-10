@@ -16,7 +16,7 @@ for (const a of document.querySelectorAll('[data-buy]')) {
   a.href = BUY_URL
   a.rel = 'nofollow'
 }
-loadPresets(BUY_URL)
+loadPresets()
 
 // --- the demo: the iframe scaled so the rings on show fill the stage ------------
 const stage = document.getElementById('stage')

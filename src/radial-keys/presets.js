@@ -1,6 +1,6 @@
-// The preset gallery. Each Get button works like Blender's: click it and Radial Keys opens the
-// preset (a radialkeys:// link), or drag it onto the wheel. Dropped anywhere else, it's the
-// .rkpreset file. Clicking a card opens a preview you can click through (preview.js).
+// The preset gallery. Each preset's button is dragged onto the wheel (tap the hotkey mid-drag to
+// open it). Dropped anywhere else, it's the .rkpreset file. Clicking a card opens a preview you can
+// click through (preview.js).
 // The presets are in public/radial-keys/presets, listed in presets.json.
 import { geometry, render } from './app/wheel.js'
 import { openPreview } from './preview.js'
@@ -75,38 +75,24 @@ function dataUrls(images = {}) {
   return Object.fromEntries(Object.entries(images).map(([name, b64]) => [name, `data:image/${type(name.split('.').pop().toLowerCase())};base64,${b64}`]))
 }
 
-let buyUrl = ''
+const IDLE = 'Drag to your wheel'
 const DRAGGING = 'Tap hotkey, drop on wheel'
 
 /**
- * The Get button, with the note that shows if a click opened nothing (Radial Keys isn't
- * installed). Used on each card and in the preview. `dragImage`: what follows the pointer.
+ * The drag button. Used on each card and in the preview. `dragImage`: what follows the pointer.
+ * Dragging is the only way in: a radialkeys:// link from a click didn't reliably open the app.
  */
 export function getButton(entry, dragImage) {
   const wrap = document.createElement('div')
   wrap.className = 'rk-get-wrap'
-  wrap.innerHTML = `
-    <a class="rk-get" draggable="true">${GRIP}<span>Get</span></a>
-    <p class="rk-preset-note" hidden>Nothing opened? <a data-buy>Get Radial Keys</a>, or <a download>download the file</a> and open it.</p>`
+  wrap.innerHTML = `<a class="rk-get" draggable="true">${GRIP}<span>${IDLE}</span></a>`
   const get = wrap.querySelector('.rk-get')
   const label = get.querySelector('span')
-  const note = wrap.querySelector('.rk-preset-note')
   get.href = entry.url
-  get.title = `Get ${entry.name}: click, or drag it onto the wheel`
-  note.querySelector('[data-buy]').href = buyUrl
-  note.querySelector('[download]').href = entry.url
+  get.title = `Drag ${entry.name} onto your wheel`
 
-  get.addEventListener('click', (e) => {
-    e.preventDefault()
-    location.href = `radialkeys://import?url=${encodeURIComponent(entry.url)}`
-    let left = false
-    const away = () => { left = true }
-    window.addEventListener('blur', away, { once: true })
-    setTimeout(() => {
-      window.removeEventListener('blur', away)
-      if (!left) note.hidden = false
-    }, 1500)
-  })
+  // A click would only open the file: it stays put.
+  get.addEventListener('click', (e) => e.preventDefault())
   get.addEventListener('dragstart', (e) => {
     const dt = e.dataTransfer
     dt.effectAllowed = 'copy'
@@ -125,12 +111,12 @@ export function getButton(entry, dragImage) {
   })
   get.addEventListener('dragend', () => {
     get.classList.remove('dragging')
-    label.textContent = 'Get'
+    label.textContent = IDLE
   })
   return wrap
 }
 
-/** A gallery card. Clicking it (anywhere but Get) opens the preview. */
+/** A gallery card. Clicking it (anywhere but its button) opens the preview. */
 function card(entry) {
   const el = document.createElement('article')
   el.className = 'rk-preset'
@@ -153,8 +139,7 @@ function card(entry) {
   return el
 }
 
-export async function loadPresets(buy) {
-  buyUrl = buy
+export async function loadPresets() {
   const list = await (await fetch(DIR + 'presets.json')).json()
   const entries = await Promise.all(list.map(async ({ file, blurb, group = 'colors' }) => {
     try {
