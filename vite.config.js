@@ -25,6 +25,8 @@ export default defineConfig({
         radialKeys: resolve(root, 'radial-keys/index.html'),
         radialKeysDemo: resolve(root, 'radial-keys/demo.html'),
         radialKeysThanks: resolve(root, 'radial-keys/thanks.html'),
+        radialKeysTerms: resolve(root, 'radial-keys/terms.html'),
+        radialKeysPrivacy: resolve(root, 'radial-keys/privacy.html'),
       },
     },
   },

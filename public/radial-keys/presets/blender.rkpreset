@@ -4,8 +4,8 @@
   "config": {
     "holdToSelect": true,
     "tapMs": 250,
-    "innerRadius": 64.0,
-    "ringWidth": 64.0,
+    "innerRadius": 77,
+    "ringWidth": 77,
     "ringGap": 4.0,
     "gaps": true,
     "accent": "#ff9a3c",

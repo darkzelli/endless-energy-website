@@ -1,52 +1,74 @@
 [
   {
     "file": "graphite.rkpreset",
+    "summary": "Neutral greys, white labels.",
     "blurb": "Neutral greys with white labels. Rings darken toward the center.",
     "group": "solid"
   },
   {
     "file": "paper.rkpreset",
+    "summary": "Light greys, blue labels.",
     "blurb": "White and soft greys with strong blue labels. Clear in bright rooms.",
     "group": "solid"
   },
   {
     "file": "midnight.rkpreset",
+    "summary": "Deep navy, sky-blue labels.",
     "blurb": "Deep navy with sky-blue labels. Calm and easy on the eyes at night.",
     "group": "solid"
   },
   {
     "file": "ember.rkpreset",
+    "summary": "Warm brown, amber labels.",
     "blurb": "Warm brown-black with amber labels. Cosy, low glare.",
     "group": "solid"
   },
   {
     "file": "moss.rkpreset",
+    "summary": "Forest greens, mint labels.",
     "blurb": "Forest greens with mint labels. Soft, natural contrast.",
     "group": "solid"
   },
   {
     "file": "lilac.rkpreset",
+    "summary": "Pale lavender, violet labels.",
     "blurb": "Pale lavender with deep violet labels. Light and friendly.",
     "group": "solid"
   },
   {
     "file": "dusk.rkpreset",
+    "summary": "A mountain sunset under glass.",
     "blurb": "A mountain sunset fills the wheel. Glass slots get darker toward the center so small keys stay clear.",
     "group": "pictures"
   },
   {
     "file": "tide.rkpreset",
+    "summary": "Moonlit waves under navy glass.",
     "blurb": "Moonlit ocean waves under navy glass slots, with white labels.",
     "group": "pictures"
   },
   {
     "file": "canopy.rkpreset",
+    "summary": "Misty pines under green glass.",
     "blurb": "A misty pine forest under deep green glass, with white labels.",
     "group": "pictures"
   },
   {
     "file": "blender.rkpreset",
+    "summary": "Views, orbit, zoom and render keys.",
     "blurb": "Blender's views, orbit, zoom, render and edit mode on one wheel: the numpad and shortcuts a laptop keyboard doesn't have.",
+    "group": "programs"
+  },
+  {
+    "file": "openfront.rkpreset",
+    "summary": "Every building, bomb and attack key.",
+    "blurb": "OpenFront.io's default keys: every building and bomb on the inner ring; attacks, boats, alliances, donations and the attack ratio around it.",
+    "group": "programs"
+  },
+  {
+    "file": "obsidian.rkpreset",
+    "summary": "Notes, search, links and tabs.",
+    "blurb": "Obsidian's default shortcuts: the quick switcher, command palette, search, graph and back/forward on the inner ring; formatting, checkboxes and tabs around it. Ctrl on Windows, Cmd on macOS.",
     "group": "programs"
   }
 ]

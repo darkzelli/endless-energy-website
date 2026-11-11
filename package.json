@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.3.0",
-    "devices.css": "^0.2.0"
+    "devices.css": "^0.2.0",
+    "simple-icons": "^15.22.0"
   }
 }

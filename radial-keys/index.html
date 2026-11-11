@@ -60,12 +60,36 @@
   <section class="rk-presets" id="presets">
     <h2>Presets</h2>
     <p class="rk-sub">Click a theme to try it on a working wheel. To use one, drag its button, tap your hotkey while dragging to open Radial Keys, then drop it on the wheel.</p>
-    <h3 class="rk-preset-group">Colours</h3>
-    <div class="rk-preset-grid" data-group="solid"></div>
-    <h3 class="rk-preset-group">Pictures</h3>
-    <div class="rk-preset-grid" data-group="pictures"></div>
-    <h3 class="rk-preset-group">Programs</h3>
-    <div class="rk-preset-grid" data-group="programs"></div>
+    <!-- One row of each group; See all shows only that group, a page at a time (presets.js). -->
+    <div class="rk-shelves" id="shelves">
+      <div class="rk-shelf" data-group="programs">
+        <div class="rk-shelf-head">
+          <h3 class="rk-preset-group">Programs</h3>
+          <button type="button" class="rk-see-all">See all</button>
+          <button type="button" class="rk-shelf-close" aria-label="Close Programs, back to all presets"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>All presets</span></button>
+        </div>
+        <div class="rk-preset-grid"></div>
+        <nav class="rk-pages" aria-label="Programs pages"></nav>
+      </div>
+      <div class="rk-shelf" data-group="solid">
+        <div class="rk-shelf-head">
+          <h3 class="rk-preset-group">Colours</h3>
+          <button type="button" class="rk-see-all">See all</button>
+          <button type="button" class="rk-shelf-close" aria-label="Close Colours, back to all presets"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>All presets</span></button>
+        </div>
+        <div class="rk-preset-grid"></div>
+        <nav class="rk-pages" aria-label="Colours pages"></nav>
+      </div>
+      <div class="rk-shelf" data-group="pictures">
+        <div class="rk-shelf-head">
+          <h3 class="rk-preset-group">Pictures</h3>
+          <button type="button" class="rk-see-all">See all</button>
+          <button type="button" class="rk-shelf-close" aria-label="Close Pictures, back to all presets"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>All presets</span></button>
+        </div>
+        <div class="rk-preset-grid"></div>
+        <nav class="rk-pages" aria-label="Pictures pages"></nav>
+      </div>
+    </div>
   </section>
 
   <section class="rk-end">
@@ -83,7 +107,7 @@
 </main>
 <footer class="wrap">
   <span>© 2026 <a href="/">bywhatevermedium</a></span>
-  <span><a href="mailto:management@bywhatevermedium.com?subject=Radial%20Keys">management@bywhatevermedium.com</a></span>
+  <span><a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="mailto:management@bywhatevermedium.com?subject=Radial%20Keys">management@bywhatevermedium.com</a></span>
 </footer>
 </body>
 </html>

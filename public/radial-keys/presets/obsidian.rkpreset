@@ -1,0 +1,212 @@
+{
+  "radialKeysPreset": 1,
+  "name": "Obsidian",
+  "config": {
+    "holdToSelect": true,
+    "tapMs": 250,
+    "innerRadius": 77,
+    "ringWidth": 77,
+    "ringGap": 4.0,
+    "gaps": true,
+    "accent": "#b69cff",
+    "fill": "#1e1b2e",
+    "theme": "solid",
+    "background": "",
+    "optionLabels": true,
+    "showApp": true,
+    "rings": [
+      {
+        "items": [
+          {
+            "label": "Switcher",
+            "key": "KeyO",
+            "mods": [
+              "cmdorctrl"
+            ],
+            "angle": 0.0,
+            "span": 45.0
+          },
+          {
+            "label": "Commands",
+            "key": "KeyP",
+            "mods": [
+              "cmdorctrl"
+            ],
+            "angle": 45.0,
+            "span": 45.0
+          },
+          {
+            "label": "New note",
+            "key": "KeyN",
+            "mods": [
+              "cmdorctrl"
+            ],
+            "angle": 90.0,
+            "span": 45.0
+          },
+          {
+            "label": "Search",
+            "key": "KeyF",
+            "mods": [
+              "cmdorctrl",
+              "shift"
+            ],
+            "angle": 135.0,
+            "span": 45.0
+          },
+          {
+            "label": "Read/Edit",
+            "key": "KeyE",
+            "mods": [
+              "cmdorctrl"
+            ],
+            "angle": 180.0,
+            "span": 45.0
+          },
+          {
+            "label": "Graph",
+            "key": "KeyG",
+            "mods": [
+              "cmdorctrl"
+            ],
+            "angle": 225.0,
+            "span": 45.0
+          },
+          {
+            "label": "Back",
+            "key": "ArrowLeft",
+            "mods": [
+              "cmdorctrl",
+              "alt"
+            ],
+            "angle": 270.0,
+            "span": 45.0
+          },
+          {
+            "label": "Forward",
+            "key": "ArrowRight",
+            "mods": [
+              "cmdorctrl",
+              "alt"
+            ],
+            "angle": 315.0,
+            "span": 45.0
+          }
+        ]
+      },
+      {
+        "items": [
+          {
+            "label": "Bold",
+            "key": "KeyB",
+            "mods": [
+              "cmdorctrl"
+            ],
+            "angle": 0.0,
+            "span": 30.0
+          },
+          {
+            "label": "Italic",
+            "key": "KeyI",
+            "mods": [
+              "cmdorctrl"
+            ],
+            "angle": 30.0,
+            "span": 30.0
+          },
+          {
+            "label": "Link",
+            "key": "KeyK",
+            "mods": [
+              "cmdorctrl"
+            ],
+            "angle": 60.0,
+            "span": 30.0
+          },
+          {
+            "label": "Checkbox",
+            "key": "KeyL",
+            "mods": [
+              "cmdorctrl"
+            ],
+            "angle": 90.0,
+            "span": 30.0
+          },
+          {
+            "label": "Find",
+            "key": "KeyF",
+            "mods": [
+              "cmdorctrl"
+            ],
+            "angle": 120.0,
+            "span": 30.0
+          },
+          {
+            "label": "New tab",
+            "key": "KeyT",
+            "mods": [
+              "cmdorctrl"
+            ],
+            "angle": 150.0,
+            "span": 30.0
+          },
+          {
+            "label": "Next tab",
+            "key": "Tab",
+            "mods": [
+              "ctrl"
+            ],
+            "angle": 180.0,
+            "span": 30.0
+          },
+          {
+            "label": "Close tab",
+            "key": "KeyW",
+            "mods": [
+              "cmdorctrl"
+            ],
+            "angle": 210.0,
+            "span": 30.0
+          },
+          {
+            "label": "Reopen tab",
+            "key": "KeyT",
+            "mods": [
+              "cmdorctrl",
+              "shift"
+            ],
+            "angle": 240.0,
+            "span": 30.0
+          },
+          {
+            "label": "Zoom +",
+            "key": "Equal",
+            "mods": [
+              "cmdorctrl"
+            ],
+            "angle": 270.0,
+            "span": 30.0
+          },
+          {
+            "label": "Zoom −",
+            "key": "Minus",
+            "mods": [
+              "cmdorctrl"
+            ],
+            "angle": 300.0,
+            "span": 30.0
+          },
+          {
+            "label": "Settings",
+            "key": "Comma",
+            "mods": [
+              "cmdorctrl"
+            ],
+            "angle": 330.0,
+            "span": 30.0
+          }
+        ]
+      }
+    ]
+  }
+}

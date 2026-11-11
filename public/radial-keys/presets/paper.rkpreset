@@ -4,8 +4,8 @@
   "config": {
     "holdToSelect": true,
     "tapMs": 250,
-    "innerRadius": 75,
-    "ringWidth": 73,
+    "innerRadius": 91,
+    "ringWidth": 88,
     "ringGap": 2,
     "gaps": false,
     "optionLabels": true,

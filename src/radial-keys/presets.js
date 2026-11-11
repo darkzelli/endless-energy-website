@@ -116,22 +116,26 @@ export function getButton(entry, dragImage) {
   return wrap
 }
 
-/** A gallery card. Clicking it (anywhere but its button) opens the preview. */
+/**
+ * A gallery card: the wheel beside its name and a one-line summary. Clicking it (anywhere but its
+ * button) opens the preview, which has the full description.
+ */
 function card(entry) {
   const el = document.createElement('article')
   el.className = 'rk-preset'
   el.innerHTML = `
-    <button type="button" class="rk-preset-open">
-      <span class="rk-preset-wheel"></span>
+    <span class="rk-preset-wheel"></span>
+    <div class="rk-preset-text">
       <h3></h3>
-    </button>
-    <p class="rk-preset-blurb"></p>`
+      <p class="rk-preset-blurb"></p>
+      <button type="button" class="rk-preset-open">See full details</button>
+    </div>`
   const open = el.querySelector('.rk-preset-open')
   const svg = thumbnail(entry)
   el.querySelector('.rk-preset-wheel').append(svg)
   el.querySelector('h3').textContent = entry.name
-  open.setAttribute('aria-label', `Preview ${entry.name}`)
-  el.querySelector('.rk-preset-blurb').textContent = entry.blurb
+  open.setAttribute('aria-label', `See full details of ${entry.name}`)
+  el.querySelector('.rk-preset-blurb').textContent = entry.summary ?? entry.blurb
   el.append(getButton(entry, svg))
   el.addEventListener('click', (e) => {
     if (!e.target.closest('.rk-get-wrap')) openPreview(entry, svg)
@@ -141,11 +145,11 @@ function card(entry) {
 
 export async function loadPresets() {
   const list = await (await fetch(DIR + 'presets.json')).json()
-  const entries = await Promise.all(list.map(async ({ file, blurb, group = 'colors' }) => {
+  const entries = await Promise.all(list.map(async ({ file, summary, blurb, group = 'colors' }) => {
     try {
       const preset = await (await fetch(DIR + file)).json()
       return {
-        file, blurb, group,
+        file, summary, blurb, group,
         name: preset.name,
         config: preset.config,
         pictures: dataUrls(preset.images),
@@ -155,7 +159,106 @@ export async function loadPresets() {
       return null // a broken file: leave it out
     }
   }))
-  for (const grid of document.querySelectorAll('.rk-preset-grid')) {
-    grid.replaceChildren(...entries.filter((e) => e?.group === grid.dataset.group).map(card))
+  shelves(entries.filter(Boolean))
+}
+
+// --- the shelves: one row per group, or one group's every preset, a page at a time -------
+const ROWS = 3 // rows on a page of See all (4 when it's one card across)
+
+function shelves(entries) {
+  const root = document.getElementById('shelves')
+  const all = [...root.querySelectorAll('.rk-shelf')].map((el) => ({
+    el,
+    group: el.dataset.group,
+    grid: el.querySelector('.rk-preset-grid'),
+    pages: el.querySelector('.rk-pages'),
+    seeAll: el.querySelector('.rk-see-all'),
+    close: el.querySelector('.rk-shelf-close'),
+    page: 0,
+  }))
+  let open = null // the shelf shown on its own
+
+  for (const s of all) {
+    s.grid.replaceChildren(...entries.filter((e) => e.group === s.group).map(card))
+    s.el.hidden = !s.grid.children.length
+    s.seeAll.addEventListener('click', () => show(s))
+    s.close.addEventListener('click', () => show(null))
   }
+
+  function show(shelf) {
+    const was = open
+    open = shelf
+    if (shelf) shelf.page = 0
+    layout()
+    if (shelf) shelf.close.focus({ preventScroll: true })
+    else was?.seeAll.focus({ preventScroll: true })
+    // Back to the top of the presets if the change left you below them.
+    const top = root.getBoundingClientRect().top
+    if (top < 0) root.scrollIntoView({ block: 'start' })
+  }
+
+  /** How many cards fit across: the grid's own column count at this width. */
+  const columns = (grid) => getComputedStyle(grid).gridTemplateColumns.split(' ').length || 1
+
+  function layout() {
+    // Shown or hidden first: a hidden grid has no columns to count.
+    for (const s of all) {
+      s.el.classList.toggle('open', s === open)
+      s.el.classList.toggle('shut', !!open && s !== open)
+    }
+    for (const s of all) {
+      if (s.el.classList.contains('shut')) continue
+      const cards = [...s.grid.children]
+      const cols = columns(s.grid)
+      const expanded = s === open
+      s.seeAll.hidden = expanded || cards.length <= cols
+      s.seeAll.textContent = `See all ${cards.length}`
+      if (!expanded) {
+        cards.forEach((c, i) => { c.hidden = i >= cols })
+        s.pages.replaceChildren()
+        continue
+      }
+      const per = cols * (cols === 1 ? ROWS + 1 : ROWS)
+      const count = Math.ceil(cards.length / per)
+      s.page = Math.min(s.page, count - 1)
+      cards.forEach((c, i) => { c.hidden = Math.floor(i / per) !== s.page })
+      pager(s, count)
+    }
+  }
+
+  /** Previous, the page numbers, Next. Nothing when it's all on one page. */
+  function pager(s, count) {
+    if (count < 2) return s.pages.replaceChildren()
+    const button = (text, page, label) => {
+      const b = document.createElement('button')
+      b.type = 'button'
+      b.textContent = text
+      if (label) b.setAttribute('aria-label', label)
+      if (page === s.page && text === String(page + 1)) b.setAttribute('aria-current', 'page')
+      b.disabled = page < 0 || page >= count
+      b.addEventListener('click', () => {
+        s.page = page
+        layout()
+        s.pages.querySelector(`[data-p="${text}"]`)?.focus()
+      })
+      b.dataset.p = text
+      return b
+    }
+    s.pages.replaceChildren(
+      button('‹', s.page - 1, 'Previous page'),
+      ...Array.from({ length: count }, (_, i) => button(String(i + 1), i, `Page ${i + 1}`)),
+      button('›', s.page + 1, 'Next page'),
+    )
+  }
+
+  addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && open && !document.querySelector('dialog[open]')) show(null)
+  })
+  // Columns change with the width, so the rows and pages are worked out again.
+  let last = 0
+  new ResizeObserver(([e]) => {
+    const w = Math.round(e.contentRect.width)
+    if (w !== last) { last = w; requestAnimationFrame(layout) } // a frame on: layout changes the height
+  }).observe(root)
+  layout()
 }

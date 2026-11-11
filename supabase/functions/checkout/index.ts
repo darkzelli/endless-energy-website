@@ -8,6 +8,8 @@ Deno.serve(async () => {
   try {
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
+      // Without this the sale is an ordinary Stripe payment, with us as the seller and no tax handled.
+      managed_payments: { enabled: true },
       line_items: [{
         quantity: 1,
         price_data: {

@@ -1,0 +1,184 @@
+{
+  "radialKeysPreset": 1,
+  "name": "OpenFront",
+  "config": {
+    "holdToSelect": true,
+    "tapMs": 250,
+    "innerRadius": 77,
+    "ringWidth": 77,
+    "ringGap": 4.0,
+    "gaps": true,
+    "accent": "#7cc4ff",
+    "fill": "#1a2130",
+    "theme": "solid",
+    "background": "",
+    "optionLabels": true,
+    "showApp": true,
+    "rings": [
+      {
+        "items": [
+          {
+            "label": "City",
+            "key": "Digit1",
+            "mods": [],
+            "angle": 0.0,
+            "span": 36.0
+          },
+          {
+            "label": "Factory",
+            "key": "Digit2",
+            "mods": [],
+            "angle": 36.0,
+            "span": 36.0
+          },
+          {
+            "label": "Port",
+            "key": "Digit3",
+            "mods": [],
+            "angle": 72.0,
+            "span": 36.0
+          },
+          {
+            "label": "Defense",
+            "key": "Digit4",
+            "mods": [],
+            "angle": 108.0,
+            "span": 36.0
+          },
+          {
+            "label": "Silo",
+            "key": "Digit5",
+            "mods": [],
+            "angle": 144.0,
+            "span": 36.0
+          },
+          {
+            "label": "SAM",
+            "key": "Digit6",
+            "mods": [],
+            "angle": 180.0,
+            "span": 36.0
+          },
+          {
+            "label": "Warship",
+            "key": "Digit7",
+            "mods": [],
+            "angle": 216.0,
+            "span": 36.0
+          },
+          {
+            "label": "Atom",
+            "key": "Digit8",
+            "mods": [],
+            "angle": 252.0,
+            "span": 36.0
+          },
+          {
+            "label": "H-Bomb",
+            "key": "Digit9",
+            "mods": [],
+            "angle": 288.0,
+            "span": 36.0
+          },
+          {
+            "label": "MIRV",
+            "key": "Digit0",
+            "mods": [],
+            "angle": 324.0,
+            "span": 36.0
+          }
+        ]
+      },
+      {
+        "items": [
+          {
+            "label": "Attack",
+            "key": "KeyG",
+            "mods": [],
+            "angle": 0.0,
+            "span": 30.0
+          },
+          {
+            "label": "Boat",
+            "key": "KeyB",
+            "mods": [],
+            "angle": 30.0,
+            "span": 30.0
+          },
+          {
+            "label": "Retaliate",
+            "key": "KeyR",
+            "mods": [
+              "shift"
+            ],
+            "angle": 60.0,
+            "span": 30.0
+          },
+          {
+            "label": "Ratio −",
+            "key": "KeyT",
+            "mods": [],
+            "angle": 90.0,
+            "span": 30.0
+          },
+          {
+            "label": "Ratio +",
+            "key": "KeyY",
+            "mods": [],
+            "angle": 120.0,
+            "span": 30.0
+          },
+          {
+            "label": "Alliance",
+            "key": "KeyK",
+            "mods": [],
+            "angle": 150.0,
+            "span": 30.0
+          },
+          {
+            "label": "Break",
+            "key": "KeyL",
+            "mods": [],
+            "angle": 180.0,
+            "span": 30.0
+          },
+          {
+            "label": "Target",
+            "key": "KeyN",
+            "mods": [],
+            "angle": 210.0,
+            "span": 30.0
+          },
+          {
+            "label": "Troops",
+            "key": "KeyJ",
+            "mods": [],
+            "angle": 240.0,
+            "span": 30.0
+          },
+          {
+            "label": "Gold",
+            "key": "KeyO",
+            "mods": [],
+            "angle": 270.0,
+            "span": 30.0
+          },
+          {
+            "label": "Center",
+            "key": "KeyC",
+            "mods": [],
+            "angle": 300.0,
+            "span": 30.0
+          },
+          {
+            "label": "All ships",
+            "key": "KeyX",
+            "mods": [],
+            "angle": 330.0,
+            "span": 30.0
+          }
+        ]
+      }
+    ]
+  }
+}

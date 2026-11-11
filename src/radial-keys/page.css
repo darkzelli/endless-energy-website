@@ -47,8 +47,9 @@ body.rk { --accent: #5b8cff; --blue: #3568e0; }
 
 /* --- what a slot can be -------------------------------------------------- */
 .rk-slots { padding: 0 0 80px; scroll-margin-top: 100px; }
-.rk-slots h2, .rk-end h2 { font-size: clamp(30px, 5vw, 40px); margin: 0 0 6px; letter-spacing: -0.02em; text-align: center; }
-.rk-sub { color: var(--muted); margin: 0 0 32px; text-align: center; }
+.rk-slots h2, .rk-end h2 { font-size: clamp(30px, 5vw, 40px); margin: 0 0 6px; letter-spacing: -0.02em; }
+.rk-end h2 { text-align: center; }
+.rk-sub { color: var(--muted); margin: 0 0 32px; max-width: 46em; }
 .rk-tiles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
 .rk-tile {
   display: flex; flex-direction: column; align-items: center; gap: 10px;
@@ -91,22 +92,51 @@ body.rk { --accent: #5b8cff; --blue: #3568e0; }
 
 /* --- presets: Get them like Blender themes (click, or drag onto the wheel) --- */
 .rk-presets { padding: 0 0 80px; scroll-margin-top: 100px; }
-.rk-presets h2 { font-size: clamp(30px, 5vw, 40px); margin: 0 0 6px; letter-spacing: -0.02em; text-align: center; }
-.rk-presets .rk-sub { max-width: 40em; margin-left: auto; margin-right: auto; }
-.rk-preset-group { margin: 36px 0 14px; font-size: 22px; letter-spacing: -0.01em; text-align: center; }
-.rk-preset-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 340px)); justify-content: center; gap: 16px; }
-@media (max-width: 600px) { .rk-preset-grid { grid-template-columns: minmax(0, 1fr); } }
-.rk-preset { display: flex; flex-direction: column; align-items: flex-start; padding: 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--bg); cursor: pointer; transition: border-color 0.12s ease, transform 0.12s ease; }
+.rk-presets h2 { font-size: clamp(30px, 5vw, 40px); margin: 0 0 6px; letter-spacing: -0.02em; }
+
+/* Shelves: a heading with See all, then one row of cards (as many as fit; presets.js hides the rest). */
+.rk-shelf { margin-top: 28px; }
+.rk-shelf[hidden], .rk-shelf.shut, .rk-preset[hidden], .rk-see-all[hidden] { display: none; }
+.rk-shelf-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.rk-preset-group { margin: 0; font-size: 22px; letter-spacing: -0.01em; }
+.rk-see-all, .rk-shelf-close, .rk-pages button {
+  border: 1px solid var(--line); border-radius: 10px; background: var(--bg);
+  font: inherit; font-size: 15px; font-weight: 600; color: var(--text); cursor: pointer;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+.rk-see-all { margin-left: auto; padding: 6px 14px; color: var(--blue); }
+.rk-see-all:hover, .rk-shelf-close:hover, .rk-pages button:hover:not(:disabled) { border-color: var(--accent); background: var(--surface); }
+.rk-see-all:focus-visible, .rk-shelf-close:focus-visible, .rk-pages button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+/* Seeing one group: its close button where See all was. */
+.rk-shelf-close { display: none; align-items: center; gap: 6px; margin-left: auto; padding: 6px 14px 6px 10px; }
+.rk-shelf.open .rk-shelf-close { display: inline-flex; }
+.rk-shelf-close svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
+.rk-pages { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.rk-pages:not(:empty) { margin-top: 20px; }
+.rk-pages button { min-width: 40px; height: 40px; padding: 0 10px; }
+.rk-pages button[aria-current="page"] { border-color: var(--blue); background: var(--blue); color: #fff; }
+.rk-pages button:disabled { opacity: 0.4; cursor: default; }
+
+.rk-preset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 14px; }
+/* Wheel on the left; name, summary and the drag button beside it. */
+.rk-preset {
+  display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 10px 16px; align-items: center;
+  padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); cursor: pointer;
+  transition: border-color 0.12s ease, transform 0.12s ease;
+}
 .rk-preset:hover { border-color: var(--accent); transform: translateY(-2px); }
-.rk-preset-open { display: flex; flex-direction: column; align-items: flex-start; width: 100%; padding: 0; border: 0; background: none; font: inherit; color: inherit; text-align: left; cursor: pointer; }
-.rk-preset-open:focus-visible { outline: 3px solid var(--accent); outline-offset: 6px; border-radius: 12px; }
-.rk-preset-wheel { align-self: center; display: block; width: min(100%, 220px); margin-bottom: 12px; }
+.rk-preset-wheel { grid-row: 1 / 3; display: block; width: 104px; }
 .rk-preset-wheel svg { display: block; width: 100%; height: auto; pointer-events: none; }
 .rk-preset .hub { display: none; }
-.rk-preset h3 { margin: 0 0 4px; font-size: 20px; letter-spacing: -0.01em; }
-.rk-preset-blurb { margin: 0 0 16px; color: var(--muted); flex: 1; }
+.rk-preset-text { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+.rk-preset h3 { margin: 0 0 2px; font-size: 18px; letter-spacing: -0.01em; }
+.rk-preset-blurb { margin: 0 0 4px; font-size: 15px; line-height: 1.4; color: var(--muted); }
+.rk-preset-open { padding: 0; border: 0; background: none; font: inherit; font-size: 14px; font-weight: 600; color: var(--blue); cursor: pointer; }
+.rk-preset-open:hover { text-decoration: underline; }
+.rk-preset-open:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.rk-preset > .rk-get-wrap { grid-column: 2; }
 .rk-get {
-  display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px 9px 10px; border-radius: 12px;
+  display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px 8px 8px; border-radius: 12px; font-size: 15px;
   background: var(--blue); color: #fff; font-weight: 700; text-decoration: none; cursor: grab;
   box-shadow: 0 6px 16px rgba(53, 104, 224, 0.24); transition: transform 0.15s ease, background 0.15s ease;
 }
